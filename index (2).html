@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Descubre tu perfil de comportamiento DISC. Evaluación profesional en 10 minutos. Conoce cómo actúas, qué te mueve y cómo comunicarte mejor.">
+<meta property="og:title" content="Test DISC Profesional — Miguel Montenegro">
+<meta property="og:description" content="Descubre tu patrón de comportamiento en 10 minutos. Reporte profesional completo.">
+<meta property="og:url" content="https://miguelmontenegro.com/disc">
+<title>Test DISC Profesional — Miguel Montenegro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ── */
+:root {
+  --ink:    #1A1F1A;
+  --cream:  #F7F3EE;
+  --warm:   #EDE7DC;
+  --forest: #2D6A4F;
+  --fern:   #52976D;
+  --mint:   #95D5B2;
+  --D:      #C9503A;
+  --I:      #C48B3C;
+  --S:      #3D8A60;
+  --C:      #3A7A96;
+  --muted:  #7A8270;
+  --border: rgba(26,31,26,.10);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+/* ── GRAIN TEXTURE ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 0; opacity: .4;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 48px;
+  background: rgba(247,243,238,.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px; font-weight: 600;
+  color: var(--forest); letter-spacing: .3px;
+}
+.nav-logo span { font-style: italic; color: var(--muted); }
+.nav-cta {
+  background: var(--forest); color: #fff;
+  border: none; border-radius: 50px;
+  padding: 10px 24px; font-family: 'DM Sans', sans-serif;
+  font-size: 13px; font-weight: 600; cursor: pointer;
+  letter-spacing: .3px; transition: all .2s;
+  text-decoration: none; display: inline-block;
+}
+.nav-cta:hover { background: var(--fern); transform: translateY(-1px); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 120px 24px 80px;
+  position: relative; z-index: 1;
+  text-align: center;
+}
+
+/* Floating DISC letters background */
+.disc-bg {
+  position: absolute; inset: 0;
+  overflow: hidden; pointer-events: none;
+}
+.disc-letter {
+  position: absolute;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700; opacity: .04;
+  animation: float 8s ease-in-out infinite;
+  user-select: none;
+}
+.disc-letter:nth-child(1) { font-size: 300px; top: -60px; left: -40px; color: var(--D); animation-delay: 0s; }
+.disc-letter:nth-child(2) { font-size: 240px; top: 10%; right: -20px; color: var(--I); animation-delay: -2s; }
+.disc-letter:nth-child(3) { font-size: 280px; bottom: -40px; left: 20%; color: var(--S); animation-delay: -4s; }
+.disc-letter:nth-child(4) { font-size: 260px; bottom: 5%; right: 5%; color: var(--C); animation-delay: -6s; }
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(-3deg); }
+  50% { transform: translateY(-20px) rotate(3deg); }
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(45,106,79,.10); border: 1px solid rgba(45,106,79,.2);
+  border-radius: 50px; padding: 6px 18px;
+  font-size: 12px; font-weight: 600; color: var(--forest);
+  letter-spacing: .5px; text-transform: uppercase;
+  margin-bottom: 28px;
+  animation: fadeDown .6s ease .1s both;
+}
+.badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--forest); animation: pulse 2s ease infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 8vw, 96px);
+  font-weight: 700; line-height: 1.0;
+  letter-spacing: -2px; margin-bottom: 24px;
+  animation: fadeDown .7s ease .2s both;
+}
+.hero-title em {
+  font-style: italic; color: var(--forest);
+}
+
+.hero-sub {
+  font-size: clamp(16px, 2vw, 19px);
+  color: var(--muted); line-height: 1.7;
+  max-width: 520px; margin: 0 auto 48px;
+  font-weight: 400;
+  animation: fadeDown .7s ease .3s both;
+}
+.hero-sub strong { color: var(--ink); font-weight: 600; }
+
+.hero-actions {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeDown .7s ease .4s both;
+}
+
+.btn-main {
+  background: var(--forest); color: #fff;
+  border: none; border-radius: 50px;
+  padding: 18px 40px; font-family: 'DM Sans', sans-serif;
+  font-size: 16px; font-weight: 600; cursor: pointer;
+  letter-spacing: .3px; transition: all .25s;
+  text-decoration: none; display: inline-flex;
+  align-items: center; gap: 10px;
+  box-shadow: 0 8px 32px rgba(45,106,79,.28);
+}
+.btn-main:hover {
+  background: var(--fern); transform: translateY(-3px);
+  box-shadow: 0 14px 40px rgba(45,106,79,.38);
+}
+.btn-main .arrow {
+  display: inline-block; transition: transform .2s;
+}
+.btn-main:hover .arrow { transform: translateX(4px); }
+
+.btn-sec {
+  background: transparent; color: var(--ink);
+  border: 1.5px solid var(--border); border-radius: 50px;
+  padding: 17px 32px; font-family: 'DM Sans', sans-serif;
+  font-size: 15px; font-weight: 500; cursor: pointer;
+  letter-spacing: .2px; transition: all .2s;
+  text-decoration: none;
+}
+.btn-sec:hover { border-color: var(--ink); background: var(--ink); color: var(--cream); }
+
+.hero-proof {
+  margin-top: 60px;
+  display: flex; align-items: center; gap: 20px;
+  font-size: 13px; color: var(--muted);
+  animation: fadeDown .7s ease .5s both;
+}
+.proof-faces {
+  display: flex;
+}
+.proof-face {
+  width: 32px; height: 32px; border-radius: 50%;
+  border: 2px solid var(--cream);
+  background: var(--warm);
+  margin-left: -8px; display: flex;
+  align-items: center; justify-content: center;
+  font-size: 14px;
+}
+.proof-face:first-child { margin-left: 0; }
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── DISC STRIP ── */
+.disc-strip {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 2px; margin: 0 48px 80px;
+  border-radius: 20px; overflow: hidden;
+  position: relative; z-index: 1;
+}
+@media(max-width: 640px) {
+  .disc-strip { grid-template-columns: 1fr 1fr; margin: 0 20px 60px; }
+}
+.disc-card {
+  padding: 36px 28px; color: #fff;
+  position: relative; overflow: hidden;
+}
+.disc-card::before {
+  content: attr(data-letter);
+  position: absolute; bottom: -20px; right: -10px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 120px; font-weight: 700;
+  opacity: .12; line-height: 1;
+}
+.disc-card.D { background: var(--D); }
+.disc-card.I { background: var(--I); }
+.disc-card.S { background: var(--S); }
+.disc-card.C { background: var(--C); }
+.disc-dim {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px; font-weight: 700;
+  margin-bottom: 4px; line-height: 1;
+}
+.disc-full { font-size: 13px; font-weight: 600; opacity: .8; margin-bottom: 12px; letter-spacing: .4px; text-transform: uppercase; }
+.disc-desc { font-size: 13px; opacity: .85; line-height: 1.5; }
+
+/* ── SECTION ── */
+section {
+  padding: 80px 48px;
+  position: relative; z-index: 1;
+}
+@media(max-width: 640px) { section { padding: 60px 24px; } }
+
+.section-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 1.2px;
+  text-transform: uppercase; color: var(--forest);
+  margin-bottom: 16px;
+}
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 700; line-height: 1.1;
+  letter-spacing: -1px; margin-bottom: 20px;
+}
+.section-sub {
+  font-size: 16px; color: var(--muted);
+  line-height: 1.7; max-width: 480px;
+}
+
+/* ── CÓMO FUNCIONA ── */
+.how-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 2px; margin-top: 48px;
+  border-radius: 16px; overflow: hidden;
+}
+@media(max-width:760px) { .how-grid { grid-template-columns: 1fr; } }
+.how-card {
+  background: var(--warm); padding: 36px 32px;
+}
+.how-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px; font-weight: 700; color: var(--forest);
+  opacity: .25; margin-bottom: 16px; line-height: 1;
+}
+.how-icon { font-size: 28px; margin-bottom: 16px; }
+.how-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; margin-bottom: 10px; }
+.how-text { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+/* ── QUÉ DESCUBRES ── */
+.discover-section {
+  background: var(--ink); color: #fff;
+  border-radius: 24px; margin: 0 48px 80px;
+  padding: 72px 64px;
+}
+@media(max-width:640px) { .discover-section { margin: 0 16px 60px; padding: 48px 28px; } }
+.discover-section .section-label { color: var(--mint); }
+.discover-section .section-title { color: #fff; }
+.discover-section .section-sub { color: rgba(255,255,255,.6); }
+
+.discover-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 16px; margin-top: 48px;
+}
+@media(max-width:640px) { .discover-grid { grid-template-columns: 1fr; } }
+.discover-item {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 14px; padding: 24px;
+}
+.discover-item-icon { font-size: 24px; margin-bottom: 12px; }
+.discover-item-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+.discover-item-text { font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.6; }
+
+/* ── SOBRE MIGUEL ── */
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center; max-width: 1000px; margin: 0 auto;
+}
+@media(max-width:760px) { .about-grid { grid-template-columns: 1fr; gap: 32px; } }
+.about-visual {
+  background: var(--warm); border-radius: 20px;
+  aspect-ratio: 4/5; display: flex;
+  align-items: center; justify-content: center;
+  font-size: 80px; position: relative; overflow: hidden;
+}
+.about-visual::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 40%;
+  background: linear-gradient(transparent, rgba(45,106,79,.15));
+}
+.about-badge-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 24px;
+}
+.about-badge {
+  background: var(--warm); border-radius: 10px;
+  padding: 12px 14px;
+}
+.about-badge-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px; font-weight: 700; color: var(--forest);
+}
+.about-badge-label { font-size: 11px; color: var(--muted); line-height: 1.3; }
+
+/* ── PRECIO ── */
+.pricing-section {
+  text-align: center; max-width: 560px; margin: 0 auto;
+}
+.price-card {
+  background: #fff; border-radius: 24px;
+  padding: 48px 40px; margin-top: 40px;
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 40px rgba(26,31,26,.06);
+  position: relative; overflow: hidden;
+}
+.price-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, var(--D), var(--I), var(--S), var(--C));
+}
+.price-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
+}
+.price-amount {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 72px; font-weight: 700; line-height: 1;
+  color: var(--forest);
+}
+.price-currency { font-size: 24px; vertical-align: super; font-weight: 400; }
+.price-clp { font-size: 16px; color: var(--muted); margin-bottom: 32px; }
+.price-features { text-align: left; margin-bottom: 32px; }
+.price-feature {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+  font-size: 14px; color: var(--ink);
+}
+.price-feature:last-child { border-bottom: 0; }
+.price-feature-icon { color: var(--forest); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.price-note { font-size: 12px; color: var(--muted); margin-top: 16px; }
+
+/* ── CTA FINAL ── */
+.cta-section {
+  background: linear-gradient(135deg, var(--forest) 0%, #1a4a35 100%);
+  border-radius: 24px; margin: 0 48px 80px;
+  padding: 80px 64px; text-align: center;
+  position: relative; overflow: hidden;
+}
+@media(max-width:640px) { .cta-section { margin: 0 16px 60px; padding: 56px 28px; } }
+.cta-section::before {
+  content: 'DISC';
+  position: absolute; bottom: -60px; right: -40px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 220px; font-weight: 700;
+  color: rgba(255,255,255,.04); line-height: 1;
+  letter-spacing: -8px;
+}
+.cta-section .section-title { color: #fff; }
+.cta-section .section-sub { color: rgba(255,255,255,.65); margin: 0 auto 40px; }
+.btn-cta-white {
+  background: #fff; color: var(--forest);
+  border: none; border-radius: 50px;
+  padding: 18px 44px; font-family: 'DM Sans', sans-serif;
+  font-size: 16px; font-weight: 700; cursor: pointer;
+  letter-spacing: .3px; transition: all .25s;
+  text-decoration: none; display: inline-flex;
+  align-items: center; gap: 10px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.2);
+}
+.btn-cta-white:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(0,0,0,.3); }
+
+/* ── FOOTER ── */
+footer {
+  padding: 32px 48px; text-align: center;
+  font-size: 12px; color: var(--muted);
+  border-top: 1px solid var(--border);
+  position: relative; z-index: 1;
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Miguel Montenegro <span>· Coach DISC</span></div>
+  <a class="nav-cta" href="https://script.google.com/macros/s/AKfycbzRNoNX0raFlunW5xNzsnK_-zh1jsK5DED9oj7gDQTrKO6GZMxAsNiKn1zyF8zIv5qmSQ/exec" target="_blank">Comenzar test →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="disc-bg">
+    <div class="disc-letter">D</div>
+    <div class="disc-letter">I</div>
+    <div class="disc-letter">S</div>
+    <div class="disc-letter">C</div>
+  </div>
+
+  <div class="hero-badge">
+    <div class="badge-dot"></div>
+    Evaluación DISC Profesional
+  </div>
+
+  <h1 class="hero-title">
+    Descubre cómo<br>
+    <em>realmente actúas</em>
+  </h1>
+
+  <p class="hero-sub">
+    10 minutos. 28 preguntas. Un reporte que te va a decir
+    <strong>lo que ya sabías de ti mismo</strong> — pero que nunca habías visto tan claro.
+  </p>
+
+  <div class="hero-actions">
+    <a class="btn-main" href="https://script.google.com/macros/s/AKfycbzRNoNX0raFlunW5xNzsnK_-zh1jsK5DED9oj7gDQTrKO6GZMxAsNiKn1zyF8zIv5qmSQ/exec" target="_blank">
+      Hacer el test gratis <span class="arrow">→</span>
+    </a>
+    <a class="btn-sec" href="#como-funciona">¿Cómo funciona?</a>
+  </div>
+
+  <div class="hero-proof">
+    <div class="proof-faces">
+      <div class="proof-face">👩</div>
+      <div class="proof-face">👨</div>
+      <div class="proof-face">👩‍💼</div>
+      <div class="proof-face">👨‍💼</div>
+      <div class="proof-face">🧑</div>
+    </div>
+    <span>Profesionales que ya conocen su perfil</span>
+  </div>
+</section>
+
+<!-- DISC STRIP -->
+<div class="disc-strip reveal">
+  <div class="disc-card D" data-letter="D">
+    <div class="disc-dim">D</div>
+    <div class="disc-full">Dominante</div>
+    <div class="disc-desc">Cómo enfrentas los desafíos y tomas decisiones bajo presión.</div>
+  </div>
+  <div class="disc-card I" data-letter="I">
+    <div class="disc-dim">I</div>
+    <div class="disc-full">Influyente</div>
+    <div class="disc-desc">Cómo te relacionas, comunicas y persuades a quienes te rodean.</div>
+  </div>
+  <div class="disc-card S" data-letter="S">
+    <div class="disc-dim">S</div>
+    <div class="disc-full">Estable</div>
+    <div class="disc-desc">Cómo respondes al ritmo de tu entorno y gestionas los cambios.</div>
+  </div>
+  <div class="disc-card C" data-letter="C">
+    <div class="disc-dim">C</div>
+    <div class="disc-full">Concienzudo</div>
+    <div class="disc-desc">Cómo trabajas con normas, datos y estándares de calidad.</div>
+  </div>
+</div>
+
+<!-- CÓMO FUNCIONA -->
+<section id="como-funciona">
+  <div class="section-label">Proceso</div>
+  <h2 class="section-title reveal">Simple, rápido<br>y revelador</h2>
+  <p class="section-sub reveal">Sin cuentas, sin largas instrucciones. Solo tú y 28 grupos de palabras.</p>
+
+  <div class="how-grid reveal">
+    <div class="how-card">
+      <div class="how-num">01</div>
+      <div class="how-icon">✍️</div>
+      <div class="how-title">Responde 28 grupos</div>
+      <div class="how-text">Para cada grupo de 4 adjetivos, elige cuál te describe más y cuál menos. Sin pensar demasiado — la primera reacción es la más honesta.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-num">02</div>
+      <div class="how-icon">📊</div>
+      <div class="how-title">Ve tu perfil demo</div>
+      <div class="how-text">Al instante verás tus tres gráficas de comportamiento y tu patrón principal. Gratis, sin comprometer nada.</div>
+    </div>
+    <div class="how-card">
+      <div class="how-num">03</div>
+      <div class="how-icon">📩</div>
+      <div class="how-title">Desbloquea el reporte completo</div>
+      <div class="how-text">Por $4.990 recibes en tu email el análisis completo: ambiente ideal, valores, cómo comunicarte y mucho más.</div>
+    </div>
+  </div>
+</section>
+
+<!-- QUÉ DESCUBRES -->
+<div class="discover-section reveal">
+  <div class="section-label">Tu reporte incluye</div>
+  <h2 class="section-title">Todo lo que necesitas<br>saber sobre ti</h2>
+  <p class="section-sub">El reporte completo no es un resumen genérico. Es un análisis personalizado basado en tus respuestas específicas.</p>
+
+  <div class="discover-grid">
+    <div class="discover-item">
+      <div class="discover-item-icon">🎯</div>
+      <div class="discover-item-title">Tres perfiles de comportamiento</div>
+      <div class="discover-item-text">Cómo te ven los demás, cómo reaccionas bajo presión y cómo te ves a ti mismo. Son tres realidades distintas.</div>
+    </div>
+    <div class="discover-item">
+      <div class="discover-item-icon">🌱</div>
+      <div class="discover-item-title">Tu ambiente de trabajo ideal</div>
+      <div class="discover-item-text">Las condiciones específicas donde eres más productivo, más feliz y más efectivo.</div>
+    </div>
+    <div class="discover-item">
+      <div class="discover-item-icon">💎</div>
+      <div class="discover-item-title">Valores que aportas</div>
+      <div class="discover-item-text">Lo que traes a cualquier equipo u organización que otros no siempre pueden ver pero siempre sienten.</div>
+    </div>
+    <div class="discover-item">
+      <div class="discover-item-icon">🗣</div>
+      <div class="discover-item-title">Cómo comunicarte mejor</div>
+      <div class="discover-item-text">Las palabras que funcionan contigo, cómo crearte compromiso y qué evitar para no generar fricción.</div>
+    </div>
+    <div class="discover-item">
+      <div class="discover-item-icon">⚡</div>
+      <div class="discover-item-title">Tu dimensión dominante</div>
+      <div class="discover-item-text">La dimensión conductual que más define cómo operas — con todo su potencial y sus puntos ciegos.</div>
+    </div>
+    <div class="discover-item">
+      <div class="discover-item-icon">🧩</div>
+      <div class="discover-item-title">Tu patrón clásico</div>
+      <div class="discover-item-text">Entre 18 patrones posibles, cuál es el tuyo y qué dice sobre cómo funciona tu comportamiento en profundidad.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SOBRE MIGUEL -->
+<section>
+  <div class="about-grid">
+    <div>
+      <div class="section-label reveal">Quién evalúa</div>
+      <h2 class="section-title reveal">Miguel Montenegro</h2>
+      <p class="section-sub reveal">Coach certificado IAC, psicólogo organizacional y 32 años de experiencia en banca, tecnología, construcción y alimentación. Autor de 10 libros. Especialista en comportamiento humano y desarrollo de liderazgo.</p>
+      <p class="section-sub reveal" style="margin-top:16px;">Este sistema DISC fue desarrollado y calibrado desde la experiencia real con cientos de profesionales y equipos — no desde un manual.</p>
+      <div class="about-badge-grid reveal">
+        <div class="about-badge">
+          <div class="about-badge-num">32</div>
+          <div class="about-badge-label">años de experiencia corporativa</div>
+        </div>
+        <div class="about-badge">
+          <div class="about-badge-num">10</div>
+          <div class="about-badge-label">libros publicados</div>
+        </div>
+        <div class="about-badge">
+          <div class="about-badge-num">IAC</div>
+          <div class="about-badge-label">Coach certificado internacional</div>
+        </div>
+        <div class="about-badge">
+          <div class="about-badge-num">DISC</div>
+          <div class="about-badge-label">Certificado en evaluación conductual</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual reveal">
+      🧠
+    </div>
+  </div>
+</section>
+
+<!-- PRECIO -->
+<section>
+  <div class="pricing-section">
+    <div class="section-label reveal">Inversión</div>
+    <h2 class="section-title reveal">Un precio que no<br>requiere pensarlo</h2>
+    <p class="section-sub reveal" style="margin: 0 auto;">El reporte demo es gratis. El reporte completo cuesta menos que un café con leche y una hallulla.</p>
+
+    <div class="price-card reveal">
+      <div class="price-label">Reporte Completo · Pago único</div>
+      <div class="price-amount">
+        <span class="price-currency">$</span>4.990
+      </div>
+      <div class="price-clp">pesos chilenos · sin suscripción</div>
+      <div class="price-features">
+        <div class="price-feature">
+          <span class="price-feature-icon">✓</span>
+          Tres gráficas de comportamiento completas
+        </div>
+        <div class="price-feature">
+          <span class="price-feature-icon">✓</span>
+          Patrón clásico con análisis en profundidad
+        </div>
+        <div class="price-feature">
+          <span class="price-feature-icon">✓</span>
+          Ambiente de trabajo ideal personalizado
+        </div>
+        <div class="price-feature">
+          <span class="price-feature-icon">✓</span>
+          Valores que aportas a tu organización
+        </div>
+        <div class="price-feature">
+          <span class="price-feature-icon">✓</span>
+          Dimensión conductual dominante completa
+        </div>
+        <div class="price-feature">
+          <span class="price-feature-icon">✓</span>
+          Reporte en tu email en minutos
+        </div>
+      </div>
+      <a class="btn-main" href="https://script.google.com/macros/s/AKfycbzRNoNX0raFlunW5xNzsnK_-zh1jsK5DED9oj7gDQTrKO6GZMxAsNiKn1zyF8zIv5qmSQ/exec" target="_blank" style="width:100%;justify-content:center;">
+        Comenzar ahora <span class="arrow">→</span>
+      </a>
+      <p class="price-note">Pago seguro con Webpay · Tarjeta débito, crédito o prepago</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<div class="cta-section reveal">
+  <h2 class="section-title">¿Listo para verte<br><em style="font-style:italic;color:var(--mint);">con claridad?</em></h2>
+  <p class="section-sub">10 minutos. El reporte demo es gratis. Empieza ahora.</p>
+  <a class="btn-cta-white" href="https://script.google.com/macros/s/AKfycbzRNoNX0raFlunW5xNzsnK_-zh1jsK5DED9oj7gDQTrKO6GZMxAsNiKn1zyF8zIv5qmSQ/exec" target="_blank">
+    Hacer el test → 
+  </a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Miguel Montenegro · Sistema de Perfil Personal DISC<br>
+  <a href="https://miguelmontenegro.com" style="color:var(--muted);text-decoration:none;">miguelmontenegro.com</a>
+  · <a href="https://instagram.com/miguelmontenegroc" style="color:var(--muted);text-decoration:none;">@miguelmontenegroc</a></p>
+</footer>
+
+<script>
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(el => {
+    if (el.isIntersecting) {
+      el.target.classList.add('visible');
+      observer.unobserve(el.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
