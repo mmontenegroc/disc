@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Procesando pago...</title>
+<style>
+body{font-family:sans-serif;display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:#f0faf4;}
+.box{background:#fff;border-radius:16px;padding:48px;text-align:center;max-width:400px;box-shadow:0 4px 20px rgba(0,0,0,.08);}
+.spin{animation:spin 1s linear infinite;display:inline-block;font-size:48px;margin-bottom:16px;}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+h2{color:#2D6A4F;} p{color:#888;font-size:14px;}
+</style>
+</head>
+<body>
+<div class="box">
+  <div class="spin">🌿</div>
+  <h2>Procesando tu pago...</h2>
+  <p>Por favor espera un momento</p>
+</div>
+<script>
+var params = new URLSearchParams(window.location.search);
+var discToken = params.get('disc_token');
+var BACKEND = 'https://disc-backend-production-d792.up.railway.app';
+
+if (discToken) {
+  window.location.href = BACKEND + '/pagos/retorno/' + discToken;
+} else {
+  document.querySelector('h2').textContent = 'Sin token de pago';
+  document.querySelector('p').textContent = 'No se recibió información del pago.';
+  document.querySelector('.spin').textContent = '❌';
+  document.querySelector('.spin').style.animation = 'none';
+}
+</script>
+</body>
+</html>
