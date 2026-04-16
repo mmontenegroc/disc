@@ -529,19 +529,27 @@ function renderQuestion(){
   document.getElementById('btn-prev').style.opacity=currentQ===0?'.4':'1';
   document.getElementById('btn-next').textContent=currentQ===total-1?'Ver resultados →':'Siguiente →';
   var mc=document.getElementById('mas-col'),lc=document.getElementById('menos-col');mc.innerHTML='';lc.innerHTML='';
-  q.forEach(function(adj,i){
-    var bm=document.createElement('button');bm.className='adj-btn'+(r.mas===i?' sel-mas':'');if(r.menos===i)bm.classList.add('disabled');bm.textContent=adj.t;bm.onclick=(function(idx){return function(){selectMas(idx);};})(i);mc.appendChild(bm);
-    var bl=document.createElement('button');bl.className='adj-btn'+(r.menos===i?' sel-menos':'');if(r.mas===i)bl.classList.add('disabled');bl.textContent=adj.t;bl.onclick=(function(idx){return function(){selectMenos(idx);};})(i);lc.appendChild(bl);
+  q.adjetivos.forEach(function(adj,i){
+    var bm=document.createElement('button');bm.className='adj-btn'+(r.mas===i?' sel-mas':'');if(r.menos===i)bm.classList.add('disabled');bm.textContent=adj.texto;bm.onclick=(function(idx){return function(){selectMas(idx);};})(i);mc.appendChild(bm);
+    var bl=document.createElement('button');bl.className='adj-btn'+(r.menos===i?' sel-menos':'');if(r.mas===i)bl.classList.add('disabled');bl.textContent=adj.texto;bl.onclick=(function(idx){return function(){selectMenos(idx);};})(i);lc.appendChild(bl);
   });
 }
 function selectMas(idx){var r=respuestas[currentQ];if(r.menos===idx)return;r.mas=idx;document.getElementById('q-validation').classList.remove('show');renderQuestion();}
 function selectMenos(idx){var r=respuestas[currentQ];if(r.mas===idx)return;r.menos=idx;document.getElementById('q-validation').classList.remove('show');renderQuestion();}
 function submitTest(){
   showScreen('s-loading');
+  // Convertir índices a dimensiones D/I/S/C
+  var respConvertidas = respuestas.map(function(r, qi) {
+    var adjs = PREGUNTAS[qi].adjetivos;
+    return {
+      mas:   r.mas   !== null ? adjs[r.mas].dim   : null,
+      menos: r.menos !== null ? adjs[r.menos].dim : null
+    };
+  });
   fetch('https://disc-backend-production-d792.up.railway.app/disc/procesar', {
     method:'POST',
     headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({nombre:userData.nombre,apellido:userData.apellido,email:userData.email,respuestas:respuestas})
+    body:JSON.stringify({nombre:userData.nombre,apellido:userData.apellido,email:userData.email,respuestas:respConvertidas})
   }).then(r=>r.json()).then(onResultado).catch(function(e){onError(e);});
 }
 function onResultado(res){
