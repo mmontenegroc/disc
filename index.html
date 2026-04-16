@@ -3,665 +3,661 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Descubre tu perfil de comportamiento DISC. Evaluación profesional en 10 minutos. Conoce cómo actúas, qué te mueve y cómo comunicarte mejor.">
-<meta property="og:title" content="Test DISC Profesional — Miguel Montenegro">
-<meta property="og:description" content="Descubre tu patrón de comportamiento en 10 minutos. Reporte profesional completo.">
-<meta property="og:url" content="https://miguelmontenegro.com/disc">
-<title>Test DISC Profesional — Miguel Montenegro</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>DISC · Sistema de Perfil Personal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-/* ── TOKENS ── */
-:root {
-  --ink:    #1A1F1A;
-  --cream:  #F7F3EE;
-  --warm:   #EDE7DC;
-  --forest: #2D6A4F;
-  --fern:   #52976D;
-  --mint:   #95D5B2;
-  --D:      #C9503A;
-  --I:      #C48B3C;
-  --S:      #3D8A60;
-  --C:      #3A7A96;
-  --muted:  #7A8270;
-  --border: rgba(26,31,26,.10);
-}
+:root{--cream:#FAF6F0;--linen:#F0E9DF;--sage:#E8EDE5;--forest:#2D6A4F;--fern:#52976D;--mint:#95D5B2;--amber:#D4A373;--coral:#E07A5F;--text:#2C3A2D;--muted:#7A8C7B;--D:#E07A5F;--I:#D4A373;--S:#52976D;--C:#4A90A4;--shadow:0 4px 24px rgba(44,58,45,.10);--r:20px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 60% at 10% 20%,rgba(149,213,178,.18) 0%,transparent 60%),radial-gradient(ellipse 60% 80% at 90% 80%,rgba(212,163,115,.14) 0%,transparent 60%);pointer-events:none;z-index:0;}
+.app{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:24px 20px 60px;}
+.screen{display:none;animation:fadeUp .45s ease both;}.screen.active{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.logo-wrap{text-align:center;padding:40px 0 28px;}
+.logo-disc{display:inline-flex;gap:4px;margin-bottom:14px;}
+.logo-disc span{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:700;font-size:23px;color:#fff;}
+.logo-disc .lD{background:var(--D);}.logo-disc .lI{background:var(--I);}.logo-disc .lS{background:var(--S);}.logo-disc .lC{background:var(--C);}
+.logo-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:600;color:var(--forest);}
+.logo-sub{font-size:12px;color:var(--muted);margin-top:4px;letter-spacing:.6px;text-transform:uppercase;}
+.card{background:#fff;border-radius:var(--r);box-shadow:var(--shadow);padding:36px 40px;margin-bottom:24px;}
+@media(max-width:520px){.card{padding:22px 18px;}}
+.card-title{font-family:'Playfair Display',serif;font-size:21px;font-weight:600;color:var(--forest);margin-bottom:8px;}
+.card-sub{font-size:14px;color:var(--muted);margin-bottom:26px;line-height:1.6;}
+.form-group{margin-bottom:18px;}
+.form-label{display:block;font-size:12px;font-weight:700;color:var(--forest);margin-bottom:7px;letter-spacing:.4px;text-transform:uppercase;}
+.form-input{width:100%;padding:13px 17px;border:2px solid var(--linen);border-radius:12px;font-family:'Nunito',sans-serif;font-size:15px;color:var(--text);background:var(--cream);outline:none;transition:.2s;}
+.form-input:focus{border-color:var(--fern);background:#fff;box-shadow:0 0 0 4px rgba(82,151,109,.10);}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media(max-width:480px){.form-row{grid-template-columns:1fr;}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 30px;border-radius:50px;border:none;cursor:pointer;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;letter-spacing:.3px;transition:all .2s;}
+.btn-primary{background:var(--forest);color:#fff;}.btn-primary:hover{background:var(--fern);transform:translateY(-2px);box-shadow:0 8px 20px rgba(45,106,79,.28);}
+.btn-outline{background:transparent;color:var(--forest);border:2px solid var(--forest);}.btn-outline:hover{background:var(--forest);color:#fff;}
+.btn-sm{padding:9px 20px;font-size:13px;}.btn-block{width:100%;}
+.steps-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:22px 0;}
+@media(max-width:480px){.steps-grid{grid-template-columns:1fr;}}
+.step-card{background:var(--sage);border-radius:14px;padding:16px;}
+.step-num{width:26px;height:26px;border-radius:50%;background:var(--forest);color:#fff;font-weight:700;font-size:12px;display:inline-flex;align-items:center;justify-content:center;margin-bottom:9px;}
+.step-text{font-size:13px;line-height:1.5;}
+.progress-wrap{margin-bottom:26px;}
+.progress-header{display:flex;justify-content:space-between;margin-bottom:7px;}
+.progress-label{font-size:12px;font-weight:700;color:var(--muted);}
+.progress-bar{height:5px;background:var(--linen);border-radius:99px;overflow:hidden;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--fern),var(--mint));border-radius:99px;transition:width .35s ease;}
+.q-header{background:linear-gradient(135deg,var(--forest),var(--fern));border-radius:14px;padding:18px 22px;margin-bottom:22px;color:#fff;}
+.q-num{font-size:11px;font-weight:700;opacity:.7;letter-spacing:.6px;text-transform:uppercase;margin-bottom:3px;}
+.q-instruction{font-family:'Playfair Display',serif;font-size:17px;font-weight:600;line-height:1.4;}
+.adj-columns{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(max-width:500px){.adj-columns{grid-template-columns:1fr;}}
+.col-header{text-align:center;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:7px;border-radius:7px;margin-bottom:7px;}
+.col-header.mas{background:rgba(45,106,79,.10);color:var(--forest);}.col-header.menos{background:rgba(224,122,95,.10);color:var(--coral);}
+.adj-btn{width:100%;padding:12px 14px;border-radius:11px;border:2px solid var(--linen);background:#fff;cursor:pointer;font-family:'Nunito',sans-serif;font-size:13px;font-weight:600;color:var(--text);text-align:center;transition:all .15s;margin-bottom:7px;}
+.adj-btn:hover{border-color:var(--fern);background:var(--sage);}
+.adj-btn.sel-mas{background:var(--forest);border-color:var(--forest);color:#fff;}
+.adj-btn.sel-menos{background:var(--coral);border-color:var(--coral);color:#fff;}
+.adj-btn.disabled{opacity:.4;cursor:not-allowed;}
+.validation-msg{background:rgba(224,122,95,.10);border:1px solid rgba(224,122,95,.3);border-radius:9px;padding:11px 15px;font-size:13px;color:var(--coral);margin-top:10px;display:none;}
+.validation-msg.show{display:block;}
+.nav-buttons{display:flex;gap:10px;justify-content:space-between;margin-top:22px;}
+.loading-wrap{text-align:center;padding:70px 20px;}
+.loading-icon{font-size:52px;animation:spin 2.2s linear infinite;display:inline-block;}
+@keyframes spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+.loading-text{font-family:'Playfair Display',serif;font-size:21px;color:var(--forest);margin:18px 0 7px;}
+.loading-sub{font-size:13px;color:var(--muted);}
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
+/* RESULTS */
+.report-cover{background:linear-gradient(145deg,var(--forest) 0%,var(--fern) 60%,#74b898 100%);border-radius:var(--r);padding:44px 40px;margin-bottom:20px;color:#fff;position:relative;overflow:hidden;}
+.report-cover::before{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.06);}
+.report-cover::after{content:'';position:absolute;bottom:-80px;left:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.04);}
+.rc-label{font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;opacity:.65;margin-bottom:6px;}
+.rc-title{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;line-height:1.2;margin-bottom:4px;}
+.rc-sub{font-size:14px;opacity:.75;margin-bottom:24px;}
+.rc-badge{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:50px;padding:10px 22px;}
+.rc-badge-dot{width:10px;height:10px;border-radius:50%;background:#fff;}
+.rc-badge-text{font-size:14px;font-weight:700;}
+.rc-meta{margin-top:22px;font-size:12px;opacity:.6;letter-spacing:.3px;}
+.sec-heading{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--forest);padding-bottom:10px;border-bottom:2px solid var(--linen);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.sec-heading::before{content:'';width:4px;height:20px;background:var(--forest);border-radius:2px;flex-shrink:0;}
+.dim-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0;}
+.dim-card{border-radius:0 8px 8px 0;padding:10px 14px;}
+.dim-card.D{background:rgba(224,122,95,.08);border-left:3px solid var(--D);}
+.dim-card.I{background:rgba(212,163,115,.08);border-left:3px solid var(--I);}
+.dim-card.S{background:rgba(82,151,109,.08);border-left:3px solid var(--S);}
+.dim-card.C{background:rgba(74,144,164,.08);border-left:3px solid var(--C);}
+.dim-card-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px;}
+.dim-card.D .dim-card-title{color:var(--D);}.dim-card.I .dim-card-title{color:var(--I);}.dim-card.S .dim-card-title{color:var(--S);}.dim-card.C .dim-card-title{color:var(--C);}
+.dim-card-text{font-size:12px;color:var(--text);}
 
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--cream);
-  color: var(--ink);
-  overflow-x: hidden;
-}
+/* BAR CHARTS */
+.charts-duo{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:540px){.charts-duo{grid-template-columns:1fr;}}
+.bar-chart-wrap{background:var(--cream);border-radius:14px;padding:20px 18px;}
+.bc-title{font-size:10px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.bc-label{font-family:'Playfair Display',serif;font-size:14px;font-weight:600;color:var(--text);margin-bottom:16px;}
+.bc-row{display:flex;align-items:center;gap:10px;margin-bottom:11px;}
+.bc-dim{width:16px;font-size:12px;font-weight:800;text-align:center;flex-shrink:0;}
+.bc-dim.D{color:var(--D);}.bc-dim.I{color:var(--I);}.bc-dim.S{color:var(--S);}.bc-dim.C{color:var(--C);}
+.bc-track{flex:1;height:24px;background:#fff;border-radius:6px;overflow:hidden;border:1px solid var(--linen);}
+.bc-fill{height:100%;border-radius:6px;display:flex;align-items:center;justify-content:flex-end;padding-right:8px;transition:width 1.1s cubic-bezier(.17,.67,.35,1);}
+.bc-fill.D{background:linear-gradient(90deg,rgba(224,122,95,.5),var(--D));}.bc-fill.I{background:linear-gradient(90deg,rgba(212,163,115,.5),var(--I));}
+.bc-fill.S{background:linear-gradient(90deg,rgba(82,151,109,.5),var(--S));}.bc-fill.C{background:linear-gradient(90deg,rgba(74,144,164,.5),var(--C));}
+.bc-val{font-size:11px;font-weight:800;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3);}
+.bc-patron{margin-top:14px;padding-top:12px;border-top:1px solid var(--linen);text-align:center;}
+.bc-patron-label{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);margin-bottom:3px;}
+.bc-patron-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--forest);}
 
-/* ── GRAIN TEXTURE ── */
-body::before {
-  content: '';
-  position: fixed; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-  pointer-events: none; z-index: 0; opacity: .4;
-}
+/* POLAR */
+.polar-duo{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;}
+@media(max-width:540px){.polar-duo{grid-template-columns:1fr;}}
+.polar-wrap{background:var(--cream);border-radius:14px;padding:16px;text-align:center;}
+.polar-label{font-size:10px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+.polar-canvas-wrap{position:relative;height:220px;}
 
-/* ── NAV ── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0;
-  z-index: 100;
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 20px 48px;
-  background: rgba(247,243,238,.85);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-}
-.nav-logo {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px; font-weight: 600;
-  color: var(--forest); letter-spacing: .3px;
-}
-.nav-logo span { font-style: italic; color: var(--muted); }
-.nav-cta {
-  background: var(--forest); color: #fff;
-  border: none; border-radius: 50px;
-  padding: 10px 24px; font-family: 'DM Sans', sans-serif;
-  font-size: 13px; font-weight: 600; cursor: pointer;
-  letter-spacing: .3px; transition: all .2s;
-  text-decoration: none; display: inline-block;
-}
-.nav-cta:hover { background: var(--fern); transform: translateY(-1px); }
+/* CARACTERÍSTICAS */
+.caract-text{font-size:14px;line-height:1.9;color:var(--text);border-left:3px solid var(--mint);padding-left:18px;margin-bottom:16px;}
 
-/* ── HERO ── */
-.hero {
-  min-height: 100vh;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 120px 24px 80px;
-  position: relative; z-index: 1;
-  text-align: center;
-}
+/* LISTAS */
+.list-section{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+@media(max-width:540px){.list-section{grid-template-columns:1fr;}}
+.list-block-title{font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--forest);margin-bottom:12px;}
+.disc-list{list-style:none;padding:0;}
+.disc-list li{font-size:13px;color:var(--text);line-height:1.5;padding:9px 0 9px 22px;border-bottom:1px solid var(--linen);position:relative;}
+.disc-list li::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:8px;height:8px;border-radius:50%;background:var(--fern);}
+.disc-list.coral li::before{background:var(--coral);}
+.disc-list li:last-child{border-bottom:0;}
 
-/* Floating DISC letters background */
-.disc-bg {
-  position: absolute; inset: 0;
-  overflow: hidden; pointer-events: none;
-}
-.disc-letter {
-  position: absolute;
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 700; opacity: .04;
-  animation: float 8s ease-in-out infinite;
-  user-select: none;
-}
-.disc-letter:nth-child(1) { font-size: 300px; top: -60px; left: -40px; color: var(--D); animation-delay: 0s; }
-.disc-letter:nth-child(2) { font-size: 240px; top: 10%; right: -20px; color: var(--I); animation-delay: -2s; }
-.disc-letter:nth-child(3) { font-size: 280px; bottom: -40px; left: 20%; color: var(--S); animation-delay: -4s; }
-.disc-letter:nth-child(4) { font-size: 260px; bottom: 5%; right: 5%; color: var(--C); animation-delay: -6s; }
+/* PATRÓN DETALLE */
+.patron-head{background:linear-gradient(135deg,var(--forest),var(--fern));border-radius:14px 14px 0 0;padding:22px 26px;color:#fff;}
+.patron-head-label{font-size:11px;font-weight:700;letter-spacing:.7px;text-transform:uppercase;opacity:.7;margin-bottom:4px;}
+.patron-head-name{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;}
+.patron-body{background:#fff;border:1px solid var(--linen);border-top:0;border-radius:0 0 14px 14px;}
+.patron-desc-text{font-size:14px;line-height:1.85;color:var(--text);padding:22px 26px;border-bottom:1px solid var(--linen);}
+.patron-grid{display:grid;grid-template-columns:1fr 1fr;}
+@media(max-width:500px){.patron-grid{grid-template-columns:1fr;}.patron-item:nth-child(odd){border-right:0!important;}}
+.patron-item{padding:13px 20px;border-bottom:1px solid var(--linen);}
+.patron-item:nth-child(odd){border-right:1px solid var(--linen);}
+.patron-item-label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:4px;}
+.patron-item-val{font-size:13px;color:var(--text);line-height:1.5;}
 
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(-3deg); }
-  50% { transform: translateY(-20px) rotate(3deg); }
-}
+.actions-card{text-align:center;background:#fff;border-radius:var(--r);padding:30px;box-shadow:var(--shadow);}
+.actions-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:14px;}
+.report-footer{text-align:center;font-size:11px;color:var(--muted);margin-top:32px;padding-top:18px;border-top:1px solid var(--linen);}
 
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(45,106,79,.10); border: 1px solid rgba(45,106,79,.2);
-  border-radius: 50px; padding: 6px 18px;
-  font-size: 12px; font-weight: 600; color: var(--forest);
-  letter-spacing: .5px; text-transform: uppercase;
-  margin-bottom: 28px;
-  animation: fadeDown .6s ease .1s both;
+/* DEMO / LOCKED */
+.locked-section{position:relative;overflow:hidden;border-radius:var(--r);}
+.locked-blur{filter:blur(5px);pointer-events:none;user-select:none;opacity:.5;}
+.locked-overlay{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  background:rgba(250,246,240,.85);backdrop-filter:blur(2px);
+  border-radius:var(--r);padding:24px;text-align:center;
 }
-.badge-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--forest); animation: pulse 2s ease infinite;
+.lock-icon{font-size:36px;margin-bottom:12px;}
+.lock-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--forest);margin-bottom:8px;}
+.lock-sub{font-size:13px;color:var(--muted);margin-bottom:20px;line-height:1.5;}
+.btn-unlock{
+  background:linear-gradient(135deg,var(--forest),var(--fern));
+  color:#fff;border:none;border-radius:50px;padding:14px 32px;
+  font-family:'Nunito',sans-serif;font-size:15px;font-weight:700;
+  cursor:pointer;box-shadow:0 6px 20px rgba(45,106,79,.35);
+  transition:all .2s;letter-spacing:.3px;
 }
-@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.8)} }
+.btn-unlock:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(45,106,79,.45);}
+.precio-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--sage);border-radius:50px;padding:6px 16px;
+  font-size:13px;font-weight:700;color:var(--forest);margin-top:12px;
+}
+.demo-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(212,163,115,.15);border:1px solid rgba(212,163,115,.4);
+  border-radius:50px;padding:5px 14px;font-size:11px;font-weight:700;
+  color:var(--amber);letter-spacing:.5px;text-transform:uppercase;
+  margin-bottom:12px;
+}
+/* Payment modal */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:100;align-items:center;justify-content:center;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:#fff;border-radius:20px;padding:36px 32px;max-width:440px;width:90%;text-align:center;animation:fadeUp .3s ease;}
+.modal-title{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--forest);margin-bottom:8px;}
+.modal-sub{font-size:14px;color:var(--muted);margin-bottom:24px;line-height:1.6;}
+.precio-grande{font-family:'Playfair Display',serif;font-size:42px;font-weight:700;color:var(--forest);}
+.precio-moneda{font-size:18px;font-weight:700;color:var(--muted);}
+.modal-features{text-align:left;margin:20px 0;background:var(--sage);border-radius:12px;padding:16px 20px;}
+.modal-features li{font-size:13px;color:var(--text);margin-bottom:8px;list-style:none;padding-left:20px;position:relative;}
+.modal-features li::before{content:'✓';position:absolute;left:0;color:var(--forest);font-weight:700;}
+.modal-cancel{margin-top:12px;font-size:12px;color:var(--muted);cursor:pointer;background:none;border:none;font-family:'Nunito',sans-serif;}
+.modal-cancel:hover{color:var(--text);}
 
-.hero-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(52px, 8vw, 96px);
-  font-weight: 700; line-height: 1.0;
-  letter-spacing: -2px; margin-bottom: 24px;
-  animation: fadeDown .7s ease .2s both;
-}
-.hero-title em {
-  font-style: italic; color: var(--forest);
-}
+/* DIMENSIÓN SECTION */
+.dim-section{margin-bottom:8px;}
+.dim-hero{border-radius:14px;padding:22px 26px;color:#fff;margin-bottom:16px;position:relative;overflow:hidden;}
+.dim-hero::after{content:'';position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,.08);}
+.dim-hero-top{display:flex;align-items:center;gap:14px;margin-bottom:12px;}
+.dim-hero-letter{width:52px;height:52px;border-radius:14px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:28px;font-weight:700;flex-shrink:0;}
+.dim-hero-info{}
+.dim-hero-label{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;opacity:.7;margin-bottom:2px;}
+.dim-hero-name{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;}
+.dim-hero-busca{font-size:13px;opacity:.85;}
+.dim-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+@media(max-width:500px){.dim-grid-2{grid-template-columns:1fr;}}
+.dim-fact{background:rgba(255,255,255,.12);border-radius:10px;padding:12px 14px;}
+.dim-fact-label{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;opacity:.7;margin-bottom:4px;}
+.dim-fact-val{font-size:13px;line-height:1.5;}
 
-.hero-sub {
-  font-size: clamp(16px, 2vw, 19px);
-  color: var(--muted); line-height: 1.7;
-  max-width: 520px; margin: 0 auto 48px;
-  font-weight: 400;
-  animation: fadeDown .7s ease .3s both;
-}
-.hero-sub strong { color: var(--ink); font-weight: 600; }
+/* WORDS */
+.words-section{margin-top:16px;}
+.words-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px;}
+@media(max-width:500px){.words-grid{grid-template-columns:1fr;}}
+.words-block{border-radius:12px;padding:14px 16px;}
+.words-block.si{background:rgba(82,151,109,.08);border:1px solid rgba(82,151,109,.2);}
+.words-block.no{background:rgba(224,122,95,.08);border:1px solid rgba(224,122,95,.2);}
+.words-block-title{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px;}
+.words-block.si .words-block-title{color:var(--S);}
+.words-block.no .words-block-title{color:var(--coral);}
+.word-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.word-chip{padding:4px 12px;border-radius:50px;font-size:12px;font-weight:700;}
+.chip-si{background:rgba(82,151,109,.15);color:var(--S);}
+.chip-no{background:rgba(224,122,95,.15);color:var(--coral);}
 
-.hero-actions {
-  display: flex; gap: 14px; flex-wrap: wrap;
-  justify-content: center;
-  animation: fadeDown .7s ease .4s both;
-}
+/* COMUNICACIÓN */
+.como-comm{background:var(--sage);border-radius:12px;padding:16px 18px;margin-top:14px;}
+.como-comm-label{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--forest);margin-bottom:8px;}
+.como-comm-text{font-size:13px;line-height:1.7;color:var(--text);}
 
-.btn-main {
-  background: var(--forest); color: #fff;
-  border: none; border-radius: 50px;
-  padding: 18px 40px; font-family: 'DM Sans', sans-serif;
-  font-size: 16px; font-weight: 600; cursor: pointer;
-  letter-spacing: .3px; transition: all .25s;
-  text-decoration: none; display: inline-flex;
-  align-items: center; gap: 10px;
-  box-shadow: 0 8px 32px rgba(45,106,79,.28);
+@media print{
+  @page{margin:12mm;size:A4;}
+  body{background:#fff!important;font-size:11px;}
+  body::before{display:none!important;}
+  .app{max-width:100%!important;padding:0!important;}
+  #s-welcome,#s-instructions,#s-test,#s-loading{display:none!important;}
+  #s-results{display:block!important;}
+  .actions-card,.nav-buttons{display:none!important;}
+  .report-cover{background:#2D6A4F!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:8px!important;padding:24px!important;margin-bottom:8mm!important;}
+  .card{box-shadow:none!important;border:1px solid #ddd!important;margin-bottom:5mm!important;padding:14px!important;break-inside:avoid;}
+  .dim-hero{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .dim-fact{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .word-chip{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .bar-chart-wrap,.polar-wrap{background:#f8f8f8!important;border:1px solid #eee;}
+  .bc-fill{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .patron-head{-webkit-print-color-adjust:exact;print-color-adjust:exact;border-radius:6px 6px 0 0!important;}
+  .dim-card{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  .charts-duo,.polar-duo,.list-section,.patron-grid{break-inside:avoid;}
+  .polar-canvas-wrap{height:180px!important;}
 }
-.btn-main:hover {
-  background: var(--fern); transform: translateY(-3px);
-  box-shadow: 0 14px 40px rgba(45,106,79,.38);
-}
-.btn-main .arrow {
-  display: inline-block; transition: transform .2s;
-}
-.btn-main:hover .arrow { transform: translateX(4px); }
-
-.btn-sec {
-  background: transparent; color: var(--ink);
-  border: 1.5px solid var(--border); border-radius: 50px;
-  padding: 17px 32px; font-family: 'DM Sans', sans-serif;
-  font-size: 15px; font-weight: 500; cursor: pointer;
-  letter-spacing: .2px; transition: all .2s;
-  text-decoration: none;
-}
-.btn-sec:hover { border-color: var(--ink); background: var(--ink); color: var(--cream); }
-
-.hero-proof {
-  margin-top: 60px;
-  display: flex; align-items: center; gap: 20px;
-  font-size: 13px; color: var(--muted);
-  animation: fadeDown .7s ease .5s both;
-}
-.proof-faces {
-  display: flex;
-}
-.proof-face {
-  width: 32px; height: 32px; border-radius: 50%;
-  border: 2px solid var(--cream);
-  background: var(--warm);
-  margin-left: -8px; display: flex;
-  align-items: center; justify-content: center;
-  font-size: 14px;
-}
-.proof-face:first-child { margin-left: 0; }
-
-@keyframes fadeDown {
-  from { opacity: 0; transform: translateY(-16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-/* ── DISC STRIP ── */
-.disc-strip {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 2px; margin: 0 48px 80px;
-  border-radius: 20px; overflow: hidden;
-  position: relative; z-index: 1;
-}
-@media(max-width: 640px) {
-  .disc-strip { grid-template-columns: 1fr 1fr; margin: 0 20px 60px; }
-}
-.disc-card {
-  padding: 36px 28px; color: #fff;
-  position: relative; overflow: hidden;
-}
-.disc-card::before {
-  content: attr(data-letter);
-  position: absolute; bottom: -20px; right: -10px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 120px; font-weight: 700;
-  opacity: .12; line-height: 1;
-}
-.disc-card.D { background: var(--D); }
-.disc-card.I { background: var(--I); }
-.disc-card.S { background: var(--S); }
-.disc-card.C { background: var(--C); }
-.disc-dim {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 48px; font-weight: 700;
-  margin-bottom: 4px; line-height: 1;
-}
-.disc-full { font-size: 13px; font-weight: 600; opacity: .8; margin-bottom: 12px; letter-spacing: .4px; text-transform: uppercase; }
-.disc-desc { font-size: 13px; opacity: .85; line-height: 1.5; }
-
-/* ── SECTION ── */
-section {
-  padding: 80px 48px;
-  position: relative; z-index: 1;
-}
-@media(max-width: 640px) { section { padding: 60px 24px; } }
-
-.section-label {
-  font-size: 11px; font-weight: 600; letter-spacing: 1.2px;
-  text-transform: uppercase; color: var(--forest);
-  margin-bottom: 16px;
-}
-.section-title {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(36px, 5vw, 56px);
-  font-weight: 700; line-height: 1.1;
-  letter-spacing: -1px; margin-bottom: 20px;
-}
-.section-sub {
-  font-size: 16px; color: var(--muted);
-  line-height: 1.7; max-width: 480px;
-}
-
-/* ── CÓMO FUNCIONA ── */
-.how-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 2px; margin-top: 48px;
-  border-radius: 16px; overflow: hidden;
-}
-@media(max-width:760px) { .how-grid { grid-template-columns: 1fr; } }
-.how-card {
-  background: var(--warm); padding: 36px 32px;
-}
-.how-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 48px; font-weight: 700; color: var(--forest);
-  opacity: .25; margin-bottom: 16px; line-height: 1;
-}
-.how-icon { font-size: 28px; margin-bottom: 16px; }
-.how-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 600; margin-bottom: 10px; }
-.how-text { font-size: 14px; color: var(--muted); line-height: 1.6; }
-
-/* ── QUÉ DESCUBRES ── */
-.discover-section {
-  background: var(--ink); color: #fff;
-  border-radius: 24px; margin: 0 48px 80px;
-  padding: 72px 64px;
-}
-@media(max-width:640px) { .discover-section { margin: 0 16px 60px; padding: 48px 28px; } }
-.discover-section .section-label { color: var(--mint); }
-.discover-section .section-title { color: #fff; }
-.discover-section .section-sub { color: rgba(255,255,255,.6); }
-
-.discover-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 16px; margin-top: 48px;
-}
-@media(max-width:640px) { .discover-grid { grid-template-columns: 1fr; } }
-.discover-item {
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 14px; padding: 24px;
-}
-.discover-item-icon { font-size: 24px; margin-bottom: 12px; }
-.discover-item-title { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
-.discover-item-text { font-size: 13px; color: rgba(255,255,255,.55); line-height: 1.6; }
-
-/* ── SOBRE MIGUEL ── */
-.about-grid {
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 60px; align-items: center; max-width: 1000px; margin: 0 auto;
-}
-@media(max-width:760px) { .about-grid { grid-template-columns: 1fr; gap: 32px; } }
-.about-visual {
-  background: var(--warm); border-radius: 20px;
-  aspect-ratio: 4/5; display: flex;
-  align-items: center; justify-content: center;
-  font-size: 80px; position: relative; overflow: hidden;
-}
-.about-visual::after {
-  content: '';
-  position: absolute; bottom: 0; left: 0; right: 0; height: 40%;
-  background: linear-gradient(transparent, rgba(45,106,79,.15));
-}
-.about-badge-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 24px;
-}
-.about-badge {
-  background: var(--warm); border-radius: 10px;
-  padding: 12px 14px;
-}
-.about-badge-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 28px; font-weight: 700; color: var(--forest);
-}
-.about-badge-label { font-size: 11px; color: var(--muted); line-height: 1.3; }
-
-/* ── PRECIO ── */
-.pricing-section {
-  text-align: center; max-width: 560px; margin: 0 auto;
-}
-.price-card {
-  background: #fff; border-radius: 24px;
-  padding: 48px 40px; margin-top: 40px;
-  border: 1px solid var(--border);
-  box-shadow: 0 4px 40px rgba(26,31,26,.06);
-  position: relative; overflow: hidden;
-}
-.price-card::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 4px;
-  background: linear-gradient(90deg, var(--D), var(--I), var(--S), var(--C));
-}
-.price-label {
-  font-size: 11px; font-weight: 600; letter-spacing: 1px;
-  text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
-}
-.price-amount {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 72px; font-weight: 700; line-height: 1;
-  color: var(--forest);
-}
-.price-currency { font-size: 24px; vertical-align: super; font-weight: 400; }
-.price-clp { font-size: 16px; color: var(--muted); margin-bottom: 32px; }
-.price-features { text-align: left; margin-bottom: 32px; }
-.price-feature {
-  display: flex; align-items: flex-start; gap: 12px;
-  padding: 10px 0; border-bottom: 1px solid var(--border);
-  font-size: 14px; color: var(--ink);
-}
-.price-feature:last-child { border-bottom: 0; }
-.price-feature-icon { color: var(--forest); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
-.price-note { font-size: 12px; color: var(--muted); margin-top: 16px; }
-
-/* ── CTA FINAL ── */
-.cta-section {
-  background: linear-gradient(135deg, var(--forest) 0%, #1a4a35 100%);
-  border-radius: 24px; margin: 0 48px 80px;
-  padding: 80px 64px; text-align: center;
-  position: relative; overflow: hidden;
-}
-@media(max-width:640px) { .cta-section { margin: 0 16px 60px; padding: 56px 28px; } }
-.cta-section::before {
-  content: 'DISC';
-  position: absolute; bottom: -60px; right: -40px;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 220px; font-weight: 700;
-  color: rgba(255,255,255,.04); line-height: 1;
-  letter-spacing: -8px;
-}
-.cta-section .section-title { color: #fff; }
-.cta-section .section-sub { color: rgba(255,255,255,.65); margin: 0 auto 40px; }
-.btn-cta-white {
-  background: #fff; color: var(--forest);
-  border: none; border-radius: 50px;
-  padding: 18px 44px; font-family: 'DM Sans', sans-serif;
-  font-size: 16px; font-weight: 700; cursor: pointer;
-  letter-spacing: .3px; transition: all .25s;
-  text-decoration: none; display: inline-flex;
-  align-items: center; gap: 10px;
-  box-shadow: 0 8px 32px rgba(0,0,0,.2);
-}
-.btn-cta-white:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(0,0,0,.3); }
-
-/* ── FOOTER ── */
-footer {
-  padding: 32px 48px; text-align: center;
-  font-size: 12px; color: var(--muted);
-  border-top: 1px solid var(--border);
-  position: relative; z-index: 1;
-}
-
-/* ── SCROLL REVEAL ── */
-.reveal {
-  opacity: 0; transform: translateY(24px);
-  transition: opacity .7s ease, transform .7s ease;
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
+<div class="app">
 
-<!-- NAV -->
-<nav>
-  <div class="nav-logo">Miguel Montenegro <span>· Coach DISC</span></div>
-  <a class="nav-cta" href="https://script.google.com/macros/s/AKfycbzRNoNX0raFlunW5xNzsnK_-zh1jsK5DED9oj7gDQTrKO6GZMxAsNiKn1zyF8zIv5qmSQ/exec" target="_blank">Comenzar test →</a>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="disc-bg">
-    <div class="disc-letter">D</div>
-    <div class="disc-letter">I</div>
-    <div class="disc-letter">S</div>
-    <div class="disc-letter">C</div>
+<!-- BIENVENIDA -->
+<div class="screen active" id="s-welcome">
+  <div class="logo-wrap">
+    <div class="logo-disc"><span class="lD">D</span><span class="lI">I</span><span class="lS">S</span><span class="lC">C</span></div>
+    <div class="logo-title">Sistema de Perfil Personal</div>
+    <div class="logo-sub">Evaluación de comportamiento</div>
   </div>
-
-  <div class="hero-badge">
-    <div class="badge-dot"></div>
-    Evaluación DISC Profesional
-  </div>
-
-  <h1 class="hero-title">
-    Descubre cómo<br>
-    <em>realmente actúas</em>
-  </h1>
-
-  <p class="hero-sub">
-    10 minutos. 28 preguntas. Un reporte que te va a decir
-    <strong>lo que ya sabías de ti mismo</strong> — pero que nunca habías visto tan claro.
-  </p>
-
-  <div class="hero-actions">
-    <a class="btn-main" href="https://script.google.com/macros/s/AKfycbzRNoNX0raFlunW5xNzsnK_-zh1jsK5DED9oj7gDQTrKO6GZMxAsNiKn1zyF8zIv5qmSQ/exec" target="_blank">
-      Hacer el test gratis <span class="arrow">→</span>
-    </a>
-    <a class="btn-sec" href="#como-funciona">¿Cómo funciona?</a>
-  </div>
-
-  <div class="hero-proof">
-    <div class="proof-faces">
-      <div class="proof-face">👩</div>
-      <div class="proof-face">👨</div>
-      <div class="proof-face">👩‍💼</div>
-      <div class="proof-face">👨‍💼</div>
-      <div class="proof-face">🧑</div>
+  <div class="card">
+    <h2 class="card-title">Conoce tu perfil de comportamiento</h2>
+    <p class="card-sub">Este instrumento te permitirá descubrir cómo te comportas en tu entorno, cómo reaccionas bajo presión y cómo te percibes a ti mismo/a.</p>
+    <div class="form-row">
+      <div class="form-group"><label class="form-label">Nombre</label><input class="form-input" id="inp-nombre" type="text" placeholder="Tu nombre"></div>
+      <div class="form-group"><label class="form-label">Apellido</label><input class="form-input" id="inp-apellido" type="text" placeholder="Tu apellido"></div>
     </div>
-    <span>Profesionales que ya conocen su perfil</span>
-  </div>
-</section>
-
-<!-- DISC STRIP -->
-<div class="disc-strip reveal">
-  <div class="disc-card D" data-letter="D">
-    <div class="disc-dim">D</div>
-    <div class="disc-full">Dominante</div>
-    <div class="disc-desc">Cómo enfrentas los desafíos y tomas decisiones bajo presión.</div>
-  </div>
-  <div class="disc-card I" data-letter="I">
-    <div class="disc-dim">I</div>
-    <div class="disc-full">Influyente</div>
-    <div class="disc-desc">Cómo te relacionas, comunicas y persuades a quienes te rodean.</div>
-  </div>
-  <div class="disc-card S" data-letter="S">
-    <div class="disc-dim">S</div>
-    <div class="disc-full">Estable</div>
-    <div class="disc-desc">Cómo respondes al ritmo de tu entorno y gestionas los cambios.</div>
-  </div>
-  <div class="disc-card C" data-letter="C">
-    <div class="disc-dim">C</div>
-    <div class="disc-full">Concienzudo</div>
-    <div class="disc-desc">Cómo trabajas con normas, datos y estándares de calidad.</div>
+    <div class="form-group"><label class="form-label">Correo electrónico</label><input class="form-input" id="inp-email" type="email" placeholder="tu@correo.com"></div>
+    <div id="welcome-error" class="validation-msg">Por favor completa todos los campos para continuar.</div>
+    <button class="btn btn-primary btn-block" style="margin-top:6px" onclick="goInstructions()">Comenzar el test &rarr;</button>
   </div>
 </div>
 
-<!-- CÓMO FUNCIONA -->
-<section id="como-funciona">
-  <div class="section-label">Proceso</div>
-  <h2 class="section-title reveal">Simple, rápido<br>y revelador</h2>
-  <p class="section-sub reveal">Sin cuentas, sin largas instrucciones. Solo tú y 28 grupos de palabras.</p>
+<!-- INSTRUCCIONES -->
+<div class="screen" id="s-instructions">
+  <div class="logo-wrap" style="padding-top:16px">
+    <div class="logo-disc"><span class="lD">D</span><span class="lI">I</span><span class="lS">S</span><span class="lC">C</span></div>
+  </div>
+  <div class="card">
+    <h2 class="card-title">¿Cómo responder?</h2>
+    <p class="card-sub">Encontrarás 28 grupos de cuatro palabras. Para cada grupo:</p>
+    <div class="steps-grid">
+      <div class="step-card"><div class="step-num">1</div><p class="step-text"><strong>Lee los cuatro adjetivos</strong> con calma.</p></div>
+      <div class="step-card"><div class="step-num">2</div><p class="step-text">Elige el que <strong>MÁS</strong> te describe en tu entorno habitual.</p></div>
+      <div class="step-card"><div class="step-num">3</div><p class="step-text">Elige el que <strong>MENOS</strong> te describe. No puede ser el mismo.</p></div>
+      <div class="step-card"><div class="step-num">4</div><p class="step-text">Responde con <strong>espontaneidad</strong>. No hay respuestas incorrectas.</p></div>
+    </div>
+    <div style="background:var(--sage);border-radius:11px;padding:14px 18px;margin-bottom:22px;"><p style="font-size:13px;line-height:1.6;">⏱ <strong>Duración estimada:</strong> 8 a 12 minutos.</p></div>
+    <button class="btn btn-primary btn-block" onclick="startTest()">Comenzar las preguntas &rarr;</button>
+  </div>
+</div>
 
-  <div class="how-grid reveal">
-    <div class="how-card">
-      <div class="how-num">01</div>
-      <div class="how-icon">✍️</div>
-      <div class="how-title">Responde 28 grupos</div>
-      <div class="how-text">Para cada grupo de 4 adjetivos, elige cuál te describe más y cuál menos. Sin pensar demasiado — la primera reacción es la más honesta.</div>
-    </div>
-    <div class="how-card">
-      <div class="how-num">02</div>
-      <div class="how-icon">📊</div>
-      <div class="how-title">Ve tu perfil demo</div>
-      <div class="how-text">Al instante verás tus tres gráficas de comportamiento y tu patrón principal. Gratis, sin comprometer nada.</div>
-    </div>
-    <div class="how-card">
-      <div class="how-num">03</div>
-      <div class="how-icon">📩</div>
-      <div class="how-title">Desbloquea el reporte completo</div>
-      <div class="how-text">Por $4.990 recibes en tu email el análisis completo: ambiente ideal, valores, cómo comunicarte y mucho más.</div>
+<!-- TEST -->
+<div class="screen" id="s-test">
+  <div style="padding:18px 0 0">
+    <div class="progress-wrap">
+      <div class="progress-header"><span class="progress-label" id="prog-label">Pregunta 1 de 28</span><span class="progress-label" id="prog-pct">0%</span></div>
+      <div class="progress-bar"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
     </div>
   </div>
-</section>
-
-<!-- QUÉ DESCUBRES -->
-<div class="discover-section reveal">
-  <div class="section-label">Tu reporte incluye</div>
-  <h2 class="section-title">Todo lo que necesitas<br>saber sobre ti</h2>
-  <p class="section-sub">El reporte completo no es un resumen genérico. Es un análisis personalizado basado en tus respuestas específicas.</p>
-
-  <div class="discover-grid">
-    <div class="discover-item">
-      <div class="discover-item-icon">🎯</div>
-      <div class="discover-item-title">Tres perfiles de comportamiento</div>
-      <div class="discover-item-text">Cómo te ven los demás, cómo reaccionas bajo presión y cómo te ves a ti mismo. Son tres realidades distintas.</div>
+  <div class="card">
+    <div class="q-header"><div class="q-num" id="q-num-label">Grupo 1</div><div class="q-instruction">Selecciona el adjetivo que <strong>MÁS</strong> te describe y el que <strong>MENOS</strong> te describe</div></div>
+    <div class="adj-columns">
+      <div><div class="col-header mas">✦ MÁS me describe</div><div id="mas-col"></div></div>
+      <div><div class="col-header menos">✧ MENOS me describe</div><div id="menos-col"></div></div>
     </div>
-    <div class="discover-item">
-      <div class="discover-item-icon">🌱</div>
-      <div class="discover-item-title">Tu ambiente de trabajo ideal</div>
-      <div class="discover-item-text">Las condiciones específicas donde eres más productivo, más feliz y más efectivo.</div>
-    </div>
-    <div class="discover-item">
-      <div class="discover-item-icon">💎</div>
-      <div class="discover-item-title">Valores que aportas</div>
-      <div class="discover-item-text">Lo que traes a cualquier equipo u organización que otros no siempre pueden ver pero siempre sienten.</div>
-    </div>
-    <div class="discover-item">
-      <div class="discover-item-icon">🗣</div>
-      <div class="discover-item-title">Cómo comunicarte mejor</div>
-      <div class="discover-item-text">Las palabras que funcionan contigo, cómo crearte compromiso y qué evitar para no generar fricción.</div>
-    </div>
-    <div class="discover-item">
-      <div class="discover-item-icon">⚡</div>
-      <div class="discover-item-title">Tu dimensión dominante</div>
-      <div class="discover-item-text">La dimensión conductual que más define cómo operas — con todo su potencial y sus puntos ciegos.</div>
-    </div>
-    <div class="discover-item">
-      <div class="discover-item-icon">🧩</div>
-      <div class="discover-item-title">Tu patrón clásico</div>
-      <div class="discover-item-text">Entre 18 patrones posibles, cuál es el tuyo y qué dice sobre cómo funciona tu comportamiento en profundidad.</div>
+    <div class="validation-msg" id="q-validation">Debes seleccionar un adjetivo en cada columna antes de continuar.</div>
+    <div class="nav-buttons">
+      <button class="btn btn-outline btn-sm" id="btn-prev" onclick="prevQuestion()">← Anterior</button>
+      <button class="btn btn-primary btn-sm" id="btn-next" onclick="nextQuestion()">Siguiente →</button>
     </div>
   </div>
 </div>
 
-<!-- SOBRE MIGUEL -->
-<section>
-  <div class="about-grid">
-    <div>
-      <div class="section-label reveal">Quién evalúa</div>
-      <h2 class="section-title reveal">Miguel Montenegro</h2>
-      <p class="section-sub reveal">Coach certificado IAC, psicólogo organizacional y 32 años de experiencia en banca, tecnología, construcción y alimentación. Autor de 10 libros. Especialista en comportamiento humano y desarrollo de liderazgo.</p>
-      <p class="section-sub reveal" style="margin-top:16px;">Este sistema DISC fue desarrollado y calibrado desde la experiencia real con cientos de profesionales y equipos — no desde un manual.</p>
-      <div class="about-badge-grid reveal">
-        <div class="about-badge">
-          <div class="about-badge-num">32</div>
-          <div class="about-badge-label">años de experiencia corporativa</div>
-        </div>
-        <div class="about-badge">
-          <div class="about-badge-num">10</div>
-          <div class="about-badge-label">libros publicados</div>
-        </div>
-        <div class="about-badge">
-          <div class="about-badge-num">IAC</div>
-          <div class="about-badge-label">Coach certificado internacional</div>
-        </div>
-        <div class="about-badge">
-          <div class="about-badge-num">DISC</div>
-          <div class="about-badge-label">Certificado en evaluación conductual</div>
-        </div>
-      </div>
-    </div>
-    <div class="about-visual reveal">
-      🧠
-    </div>
+<!-- LOADING -->
+<div class="screen" id="s-loading">
+  <div class="loading-wrap">
+    <div class="loading-icon">🌿</div>
+    <div class="loading-text">Calculando tu perfil...</div>
+    <div class="loading-sub">Analizando tus respuestas y determinando tu patrón único</div>
   </div>
-</section>
-
-<!-- PRECIO -->
-<section>
-  <div class="pricing-section">
-    <div class="section-label reveal">Inversión</div>
-    <h2 class="section-title reveal">Un precio que no<br>requiere pensarlo</h2>
-    <p class="section-sub reveal" style="margin: 0 auto;">El reporte demo es gratis. El reporte completo cuesta menos que un café con leche y una hallulla.</p>
-
-    <div class="price-card reveal">
-      <div class="price-label">Reporte Completo · Pago único</div>
-      <div class="price-amount">
-        <span class="price-currency">$</span>4.990
-      </div>
-      <div class="price-clp">pesos chilenos · sin suscripción</div>
-      <div class="price-features">
-        <div class="price-feature">
-          <span class="price-feature-icon">✓</span>
-          Tres gráficas de comportamiento completas
-        </div>
-        <div class="price-feature">
-          <span class="price-feature-icon">✓</span>
-          Patrón clásico con análisis en profundidad
-        </div>
-        <div class="price-feature">
-          <span class="price-feature-icon">✓</span>
-          Ambiente de trabajo ideal personalizado
-        </div>
-        <div class="price-feature">
-          <span class="price-feature-icon">✓</span>
-          Valores que aportas a tu organización
-        </div>
-        <div class="price-feature">
-          <span class="price-feature-icon">✓</span>
-          Dimensión conductual dominante completa
-        </div>
-        <div class="price-feature">
-          <span class="price-feature-icon">✓</span>
-          Reporte en tu email en minutos
-        </div>
-      </div>
-      <a class="btn-main" href="https://script.google.com/macros/s/AKfycbzRNoNX0raFlunW5xNzsnK_-zh1jsK5DED9oj7gDQTrKO6GZMxAsNiKn1zyF8zIv5qmSQ/exec" target="_blank" style="width:100%;justify-content:center;">
-        Comenzar ahora <span class="arrow">→</span>
-      </a>
-      <p class="price-note">Pago seguro con Webpay · Tarjeta débito, crédito o prepago</p>
-    </div>
-  </div>
-</section>
-
-<!-- CTA FINAL -->
-<div class="cta-section reveal">
-  <h2 class="section-title">¿Listo para verte<br><em style="font-style:italic;color:var(--mint);">con claridad?</em></h2>
-  <p class="section-sub">10 minutos. El reporte demo es gratis. Empieza ahora.</p>
-  <a class="btn-cta-white" href="https://script.google.com/macros/s/AKfycbzRNoNX0raFlunW5xNzsnK_-zh1jsK5DED9oj7gDQTrKO6GZMxAsNiKn1zyF8zIv5qmSQ/exec" target="_blank">
-    Hacer el test → 
-  </a>
 </div>
 
-<!-- FOOTER -->
-<footer>
-  <p>© 2025 Miguel Montenegro · Sistema de Perfil Personal DISC<br>
-  <a href="https://miguelmontenegro.com" style="color:var(--muted);text-decoration:none;">miguelmontenegro.com</a>
-  · <a href="https://instagram.com/miguelmontenegroc" style="color:var(--muted);text-decoration:none;">@miguelmontenegroc</a></p>
-</footer>
+<!-- RESULTADOS -->
+<div class="screen" id="s-results">
 
+  <div class="report-cover">
+    <div class="rc-label">Sistema de Perfil Personal DISC</div>
+    <div class="rc-title" id="rc-name">—</div>
+    <div class="rc-sub" id="rc-sub">Evaluación de comportamiento profesional</div>
+    <div class="rc-badge"><div class="rc-badge-dot"></div><div class="rc-badge-text" id="rc-patron">—</div></div>
+    <div class="rc-meta" id="rc-meta">—</div>
+  </div>
+
+  <!-- Introducción -->
+  <div class="card">
+    <div class="sec-heading">Introducción</div>
+    <p style="font-size:14px;line-height:1.85;color:var(--text);margin-bottom:16px;">La investigación sobre el comportamiento sugiere que las personas más efectivas son aquellas que tienen una plena comprensión de sí mismas, de sus fortalezas y áreas de mejora. Este reporte analiza tu estilo de comportamiento a lo largo de cuatro dimensiones:</p>
+    <div class="dim-grid">
+      <div class="dim-card D"><div class="dim-card-title">D · Dominante</div><div class="dim-card-text">Cómo respondes ante problemas y desafíos.</div></div>
+      <div class="dim-card I"><div class="dim-card-title">I · Influyente</div><div class="dim-card-text">Cómo influyes y convences a los demás.</div></div>
+      <div class="dim-card S"><div class="dim-card-title">S · Estable</div><div class="dim-card-text">Cómo respondes al ritmo de tu entorno.</div></div>
+      <div class="dim-card C"><div class="dim-card-title">C · Concienzudo</div><div class="dim-card-text">Cómo respondes a normas y procedimientos.</div></div>
+    </div>
+    <p style="font-size:12px;color:var(--muted);line-height:1.6;">Solo medimos el comportamiento, que es uno de los múltiples factores a considerar en una persona. Este reporte identifica tendencias observables y debe leerse como una aproximación, no como una verdad absoluta.</p>
+  </div>
+
+  <!-- Gráficas -->
+  <div class="card">
+    <div class="sec-heading">Gráficas de Estilo</div>
+    <div class="charts-duo">
+      <div class="bar-chart-wrap">
+        <div class="bc-title">Gráfica I</div>
+        <div class="bc-label">Estilo Adaptado</div>
+        <div id="bars-p1"></div>
+        <div class="bc-patron"><div class="bc-patron-label">Patrón</div><div class="bc-patron-name" id="patron-label-p1">—</div></div>
+      </div>
+      <div class="bar-chart-wrap">
+        <div class="bc-title">Gráfica II</div>
+        <div class="bc-label">Estilo Natural</div>
+        <div id="bars-p2"></div>
+        <div class="bc-patron"><div class="bc-patron-label">Patrón</div><div class="bc-patron-name" id="patron-label-p2">—</div></div>
+      </div>
+    </div>
+    <div class="polar-duo">
+      <div class="polar-wrap">
+        <div class="polar-label">Perfil Visual · Estilo Adaptado</div>
+        <div class="polar-canvas-wrap"><canvas id="chart-p1"></canvas></div>
+      </div>
+      <div class="polar-wrap">
+        <div class="polar-label">Perfil Visual · Estilo Natural</div>
+        <div class="polar-canvas-wrap"><canvas id="chart-p2"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Características Generales -->
+  <div class="card">
+    <div class="sec-heading">Características Generales</div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:18px;">Basándose en tus respuestas, este informe identifica las características que describen tu estilo de comportamiento natural.</p>
+    <div class="caract-text" id="caract-p3"></div>
+    <div class="caract-text" id="caract-extra" style="border-left-color:var(--amber);margin-top:12px;"></div>
+  </div>
+
+  <!-- DEMO badge -->
+  <div style="text-align:center;margin-bottom:8px;">
+    <span class="demo-badge">🔒 Versión Demo — Ver reporte completo más abajo</span>
+  </div>
+
+  <!-- Ambiente + Valores LOCKED -->
+  <div class="locked-section" style="margin-bottom:24px;">
+    <div class="card locked-blur" aria-hidden="true">
+      <div class="sec-heading">Ambiente de Trabajo Ideal y Valores que Aportas</div>
+      <div class="list-section">
+        <div>
+          <div class="list-block-title">Ambiente de trabajo ideal</div>
+          <ul class="disc-list"><li>Metas claras con indicadores definidos</li><li>Autonomía real para ejecutar</li><li>Reconocimiento proporcional al esfuerzo</li></ul>
+        </div>
+        <div>
+          <div class="list-block-title">Valores que aportas</div>
+          <ul class="disc-list coral"><li>Garantiza la calidad de lo que produce</li><li>Termina lo que comienza</li><li>Confiable en situaciones de alta exigencia</li></ul>
+        </div>
+      </div>
+    </div>
+    <div class="locked-overlay">
+      <div class="lock-icon">🔓</div>
+      <div class="lock-title">Desbloquea tu análisis completo</div>
+      <div class="lock-sub">Ambiente ideal, valores que aportas, patrón clásico detallado y tu dimensión conductual dominante — todo en tu email.</div>
+      <button class="btn-unlock" onclick="abrirModalPago()">Obtener Reporte Completo</button>
+      <div class="precio-tag">💳 $4.990 CLP · Pago único</div>
+    </div>
+  </div>
+
+  <!-- Patrón Detalle LOCKED -->
+  <div class="locked-section" style="margin-bottom:24px;">
+    <div class="card locked-blur" aria-hidden="true">
+      <div class="sec-heading">Patrón Clásico · Autopercepción</div>
+      <div style="height:200px;background:var(--cream);border-radius:8px;"></div>
+    </div>
+    <div class="locked-overlay">
+      <div class="lock-icon">📊</div>
+      <div class="lock-title">Patrón Clásico completo</div>
+      <div class="lock-sub">Cómo te comunicas, qué te mueve, cómo influyes y qué necesitas para ser más efectivo.</div>
+      <button class="btn-unlock" onclick="abrirModalPago()">Desbloquear</button>
+      <div class="precio-tag">💳 $4.990 CLP · Pago único</div>
+    </div>
+  </div>
+
+  <!-- Dimensión Conductual LOCKED -->
+  <div class="locked-section" style="margin-bottom:24px;">
+    <div class="card locked-blur" aria-hidden="true">
+      <div class="sec-heading">Tu Dimensión Conductual Dominante</div>
+      <div style="height:200px;background:var(--coral);border-radius:8px;opacity:.3;"></div>
+    </div>
+    <div class="locked-overlay">
+      <div class="lock-icon">🧠</div>
+      <div class="lock-title">Tu Dimensión Conductual</div>
+      <div class="lock-sub">Las palabras que funcionan contigo, cómo crearte compromiso y cómo se comunican quienes te rodean.</div>
+      <button class="btn-unlock" onclick="abrirModalPago()">Desbloquear</button>
+      <div class="precio-tag">💳 $4.990 CLP · Pago único</div>
+    </div>
+  </div>
+
+  <!-- Modal de pago -->
+  <div class="modal-overlay" id="modal-pago">
+    <div class="modal-box">
+      <p class="modal-title">Tu Reporte Profesional Completo</p>
+      <p class="modal-sub">Una sola vez. Sin suscripción. Directo a tu email.</p>
+      <div>
+        <span class="precio-moneda">$</span>
+        <span class="precio-grande">4.990</span>
+        <span class="precio-moneda"> CLP</span>
+      </div>
+      <ul class="modal-features">
+        <li>Tres perfiles completos con análisis detallado</li>
+        <li>Ambiente de trabajo ideal personalizado</li>
+        <li>Valores que aportas a tu organización</li>
+        <li>Dimensión conductual dominante con vocabulario</li>
+        <li>Cómo comunicarte y crear compromiso</li>
+        <li>Reporte en tu email en minutos</li>
+      </ul>
+      <button class="btn-unlock" id="btn-ir-pago" onclick="irAPago()" style="width:100%;padding:16px;">
+        Pagar con Flow →
+      </button>
+      <br>
+      <button class="modal-cancel" onclick="cerrarModalPago()">Cancelar</button>
+    </div>
+  </div>
+
+  <div class="actions-card">
+    <p style="font-size:13px;color:var(--muted);">¿Quieres conservar tu reporte demo?</p>
+    <div class="actions-row">
+      <button class="btn btn-primary" onclick="imprimirResultado()">🖨 Imprimir versión demo</button>
+    </div>
+  </div>
+
+  <div class="report-footer">Sistema de Perfil Personal DISC · Evaluación de comportamiento profesional<br>Todos los derechos reservados</div>
+</div>
+
+</div>
 <script>
-// Scroll reveal
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(el => {
-    if (el.isIntersecting) {
-      el.target.classList.add('visible');
-      observer.unobserve(el.target);
-    }
+var PREGUNTAS=[],respuestas=[],currentQ=0,userData={},charts=[null,null],TOKEN_PAGO="";
+var DIMENSIONES={};
+window.onload=function(){
+  fetch('https://disc-backend-production-d792.up.railway.app/disc/preguntas').then(r=>r.json()).then(function(qs){PREGUNTAS=qs;respuestas=qs.map(function(){return{mas:null,menos:null};});}).catch(function(e){console.warn('Error cargando preguntas:',e);});
+  fetch('https://disc-backend-production-d792.up.railway.app/disc/dimensiones').then(r=>r.json()).then(function(d){DIMENSIONES=d;}).catch(function(e){console.warn('Error cargando dimensiones:',e);});
+};
+function showScreen(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
+function goInstructions(){var n=document.getElementById('inp-nombre').value.trim(),a=document.getElementById('inp-apellido').value.trim(),e=document.getElementById('inp-email').value.trim(),err=document.getElementById('welcome-error');if(!n||!a||!e){err.classList.add('show');return;}err.classList.remove('show');userData={nombre:n,apellido:a,email:e};showScreen('s-instructions');}
+function startTest(){currentQ=0;renderQuestion();showScreen('s-test');}
+function prevQuestion(){if(currentQ>0){currentQ--;renderQuestion();}}
+function nextQuestion(){var r=respuestas[currentQ],v=document.getElementById('q-validation');if(r.mas===null||r.menos===null){v.classList.add('show');return;}v.classList.remove('show');if(currentQ<PREGUNTAS.length-1){currentQ++;renderQuestion();}else{submitTest();}}
+function renderQuestion(){
+  var q=PREGUNTAS[currentQ],r=respuestas[currentQ],total=PREGUNTAS.length,pct=Math.round((currentQ/total)*100);
+  document.getElementById('prog-label').textContent='Pregunta '+(currentQ+1)+' de '+total;
+  document.getElementById('prog-pct').textContent=pct+'%';
+  document.getElementById('prog-fill').style.width=pct+'%';
+  document.getElementById('q-num-label').textContent='Grupo '+(currentQ+1);
+  document.getElementById('btn-prev').style.opacity=currentQ===0?'.4':'1';
+  document.getElementById('btn-next').textContent=currentQ===total-1?'Ver resultados →':'Siguiente →';
+  var mc=document.getElementById('mas-col'),lc=document.getElementById('menos-col');mc.innerHTML='';lc.innerHTML='';
+  q.forEach(function(adj,i){
+    var bm=document.createElement('button');bm.className='adj-btn'+(r.mas===i?' sel-mas':'');if(r.menos===i)bm.classList.add('disabled');bm.textContent=adj.t;bm.onclick=(function(idx){return function(){selectMas(idx);};})(i);mc.appendChild(bm);
+    var bl=document.createElement('button');bl.className='adj-btn'+(r.menos===i?' sel-menos':'');if(r.mas===i)bl.classList.add('disabled');bl.textContent=adj.t;bl.onclick=(function(idx){return function(){selectMenos(idx);};})(i);lc.appendChild(bl);
   });
-}, { threshold: 0.1 });
+}
+function selectMas(idx){var r=respuestas[currentQ];if(r.menos===idx)return;r.mas=idx;document.getElementById('q-validation').classList.remove('show');renderQuestion();}
+function selectMenos(idx){var r=respuestas[currentQ];if(r.mas===idx)return;r.menos=idx;document.getElementById('q-validation').classList.remove('show');renderQuestion();}
+function submitTest(){
+  showScreen('s-loading');
+  fetch('https://disc-backend-production-d792.up.railway.app/disc/procesar', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({nombre:userData.nombre,apellido:userData.apellido,email:userData.email,respuestas:respuestas})
+  }).then(r=>r.json()).then(onResultado).catch(function(e){onError(e);});
+}
+function onResultado(res){
+  if(!res.ok){onError(res.error);return;}
+  TOKEN_PAGO = res.token || '';
+  // Guardar en sessionStorage como respaldo
+  if(TOKEN_PAGO) sessionStorage.setItem('disc_token', TOKEN_PAGO);
+  renderResultados(res.data);
+  showScreen('s-results');
+}
+function onError(e){alert('Ocurrió un error: '+e);showScreen('s-test');}
 
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+function renderResultados(data){
+  var p=data.puntajes,pr=data.perfiles;
+  document.getElementById('rc-name').textContent=data.nombre+' '+data.apellido;
+  document.getElementById('rc-patron').textContent='Patrón Principal: '+pr.p3.patron;
+  document.getElementById('rc-meta').textContent=data.fecha+' · Sistema de Perfil Personal DISC';
+  renderBarChart('bars-p1',{D:p.Dmas,I:p.Imas,S:p.Smas,C:p.Cmas},28);
+  renderBarChart('bars-p2',{D:p.Dmenos,I:p.Imenos,S:p.Smenos,C:p.Cmenos},28);
+  document.getElementById('patron-label-p1').textContent=pr.p1.patron;
+  document.getElementById('patron-label-p2').textContent=pr.p2.patron;
+  renderPolar('chart-p1',pr.p1.segmentos,0);
+  renderPolar('chart-p2',pr.p2.segmentos,1);
+  var desc3=pr.p3.descripcion||{};
+  document.getElementById('caract-p3').innerHTML=desc3.descripcion||'';
+  var desc1=pr.p1.descripcion||{};
+  var extraEl=document.getElementById('caract-extra');
+  if(pr.p1.patron!==pr.p3.patron&&desc1.descripcion){extraEl.innerHTML='<em style="font-size:12px;color:var(--muted);display:block;margin-bottom:8px;">En el contexto de expectativas externas (Gráfica I · '+pr.p1.patron+'):</em>'+desc1.descripcion;}
+  else{extraEl.style.display='none';}
+  // Locked sections: ambiente, valores, patrón detalle y dimensión no se renderizan en demo
+
+  // Dimensión: solo disponible en reporte completo (email)
+}
+
+function renderBarChart(containerId,scores,maxScore){
+  var dims=['D','I','S','C'],html='';
+  dims.forEach(function(d){var val=scores[d]||0,pct=Math.round((val/maxScore)*100);html+='<div class="bc-row"><span class="bc-dim '+d+'">'+d+'</span><div class="bc-track"><div class="bc-fill '+d+'" style="width:'+pct+'%"><span class="bc-val">'+val+'</span></div></div></div>';});
+  document.getElementById(containerId).innerHTML=html;
+}
+
+function renderPolar(canvasId,seg,idx){
+  if(charts[idx]){charts[idx].destroy();charts[idx]=null;}
+  var canvas=document.getElementById(canvasId),ctx=canvas.getContext('2d');
+  var lp={id:'lp'+idx,afterDraw:function(chart){
+    var c=chart.ctx,cx=(chart.chartArea.left+chart.chartArea.right)/2,cy=(chart.chartArea.top+chart.chartArea.bottom)/2;
+    var meta=chart.getDatasetMeta(0),letters=['D','I','S','C'],data=chart.data.datasets[0].data,maxR=chart.scales.r?chart.scales.r.drawingArea:90;
+    meta.data.forEach(function(arc,i){
+      var angle=(arc.startAngle+arc.endAngle)/2,val=data[i],r=maxR*(val/7);
+      var lx=cx+Math.cos(angle)*r*.6,ly=cy+Math.sin(angle)*r*.6;
+      c.save();c.font="bold 14px 'Playfair Display',serif";c.fillStyle='#fff';c.textAlign='center';c.textBaseline='middle';c.shadowColor='rgba(0,0,0,.3)';c.shadowBlur=4;c.fillText(letters[i],lx,ly-5);c.font="700 10px 'Nunito',sans-serif";c.shadowBlur=0;c.fillText(val+'/7',lx,ly+7);c.restore();
+    });
+    c.save();c.beginPath();c.arc(cx,cy,16,0,Math.PI*2);c.fillStyle='#fff';c.shadowColor='rgba(0,0,0,.1)';c.shadowBlur=6;c.fill();c.restore();
+  }};
+  charts[idx]=new Chart(ctx,{type:'polarArea',plugins:[lp],data:{labels:['D · Dominante','I · Influyente','S · Estable','C · Concienzudo'],datasets:[{data:[seg.D,seg.I,seg.S,seg.C],backgroundColor:['rgba(224,122,95,.8)','rgba(212,163,115,.8)','rgba(82,151,109,.8)','rgba(74,144,164,.8)'],hoverBackgroundColor:['rgba(224,122,95,.95)','rgba(212,163,115,.95)','rgba(82,151,109,.95)','rgba(74,144,164,.95)'],borderColor:['#E07A5F','#D4A373','#52976D','#4A90A4'],borderWidth:2.5}]},options:{scales:{r:{min:0,max:7,ticks:{stepSize:1,color:'rgba(0,0,0,0)',backdropColor:'transparent'},grid:{color:'rgba(255,255,255,.5)',circular:true,lineWidth:1.5},angleLines:{color:'rgba(255,255,255,.3)'}}},plugins:{legend:{display:true,position:'bottom',labels:{font:{size:10,family:"'Nunito',sans-serif",weight:'700'},color:'#2C3A2D',padding:10,usePointStyle:true,pointStyle:'circle'}},tooltip:{backgroundColor:'rgba(44,58,45,.9)',titleFont:{family:"'Playfair Display',serif",size:12},bodyFont:{family:"'Nunito',sans-serif",size:11},padding:10,cornerRadius:8,callbacks:{label:function(c){return' Segmento '+c.raw+' de 7';}}}},animation:{duration:950,easing:'easeInOutQuart',animateRotate:true,animateScale:true}}});
+}
+
+function renderPatronDetalle(containerId,patron,desc){
+  if(!desc){document.getElementById(containerId).innerHTML='';return;}
+  var campos=[{k:'emociones',l:'Emociones'},{k:'meta',l:'Meta'},{k:'juzga',l:'Juzga a los demás por'},{k:'influye',l:'Influye mediante'},{k:'valor',l:'Valor para la organización'},{k:'teme',l:'Teme'},{k:'presion',l:'Bajo presión'},{k:'eficaz',l:'Sería más eficaz si'}];
+  var items='';campos.forEach(function(c){if(desc[c.k]&&desc[c.k]!=='-'){items+='<div class="patron-item"><div class="patron-item-label">'+c.l+'</div><div class="patron-item-val">'+desc[c.k]+'</div></div>';}});
+  document.getElementById(containerId).innerHTML='<div class="patron-head"><div class="patron-head-label">Patrón Clásico · Gráfica III</div><div class="patron-head-name">'+patron+'</div></div><div class="patron-body"><div class="patron-desc-text">'+(desc.descripcion||'')+'</div>'+(items?'<div class="patron-grid">'+items+'</div>':'')+'</div>';
+}
+
+function renderDimension(segmentos){
+  var dims=['D','I','S','C'];
+  // Find top 1-2 dimensions by segment score
+  var sorted=dims.slice().sort(function(a,b){return segmentos[b]-segmentos[a];});
+  var top=sorted.slice(0,2).filter(function(d,i){
+    if(i===0)return true;
+    return segmentos[sorted[0]]-segmentos[d]<=1; // show 2nd if within 1 point
+  });
+
+  var html='';
+  top.forEach(function(dim,idx){
+    var d=DIMENSIONES[dim];
+    if(!d)return;
+    var seg=segmentos[dim];
+    var hexAlpha=idx===0?'ff':'cc';
+    var bgColor=d.color;
+
+    html+='<div class="dim-hero" style="background:'+bgColor+';margin-bottom:'+(idx<top.length-1?'16px':'0')+';">'
+      +'<div class="dim-hero-top">'
+      +'<div class="dim-hero-letter">'+dim+'</div>'
+      +'<div class="dim-hero-info">'
+      +'<div class="dim-hero-label">Dimensión '+(idx===0?'Principal':'Secundaria')+' · Segmento '+seg+'/7</div>'
+      +'<div class="dim-hero-name">'+dim+' · '+d.nombre+'</div>'
+      +'</div></div>'
+      +'<div class="dim-hero-busca"><strong>Busca:</strong> '+d.busca+' &nbsp;·&nbsp; <strong>Bajo estrés:</strong> '+d.bajo_estres+'</div>'
+      +'<div class="dim-grid-2" style="margin-top:14px;">'
+      +'<div class="dim-fact"><div class="dim-fact-label">Observaciones</div><div class="dim-fact-val">'+d.observaciones+'</div></div>'
+      +'<div class="dim-fact"><div class="dim-fact-label">Le encanta</div><div class="dim-fact-val">'+d.le_encanta+'</div></div>'
+      +'<div class="dim-fact"><div class="dim-fact-label">Se comunica</div><div class="dim-fact-val">'+d.se_comunica+'</div></div>'
+      +'<div class="dim-fact"><div class="dim-fact-label">Valor en el equipo</div><div class="dim-fact-val">'+d.valor_equipo+'</div></div>'
+      +'</div>'
+      +'<div class="como-comm">'
+      +'<div class="como-comm-label">¿Cómo comunicarse con esta persona?</div>'
+      +'<div class="como-comm-text">'+d.como_comunicarse+'</div>'
+      +'</div>'
+      +'<div class="words-section">'
+      +'<div class="como-comm-label" style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:8px;">Vocabulario efectivo</div>'
+      +'<div class="words-grid">'
+      +'<div class="words-block si" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);">'
+      +'<div class="words-block-title" style="color:#fff;">✓ Palabras que funcionan</div>'
+      +'<div class="word-chips">'+d.palabras_si.map(function(w){return'<span class="word-chip" style="background:rgba(255,255,255,.2);color:#fff;">'+w+'</span>';}).join('')+'</div>'
+      +'</div>'
+      +'<div class="words-block no" style="background:rgba(0,0,0,.1);border-color:rgba(255,255,255,.1);">'
+      +'<div class="words-block-title" style="color:rgba(255,255,255,.85);">✗ Palabras que no funcionan</div>'
+      +'<div class="word-chips">'+d.palabras_no.map(function(w){return'<span class="word-chip" style="background:rgba(0,0,0,.15);color:rgba(255,255,255,.9);">'+w+'</span>';}).join('')+'</div>'
+      +'</div>'
+      +'</div></div>'
+      +'</div>';
+
+    // Cómo crear compromiso below the hero
+    html+='<div style="background:var(--cream);border-radius:12px;padding:16px 18px;margin-top:10px;">'
+      +'<div style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:'+d.color+';margin-bottom:7px;">Cómo crear compromiso</div>'
+      +'<div style="font-size:13px;line-height:1.7;color:var(--text);">'+d.crea_compromiso+'</div>'
+      +'</div>';
+
+    if(idx<top.length-1) html+='<div style="height:20px;"></div>';
+  });
+
+  document.getElementById('dim-content').innerHTML=html;
+}
+
+function abrirModalPago(){document.getElementById('modal-pago').classList.add('open');}
+function cerrarModalPago(){document.getElementById('modal-pago').classList.remove('open');}
+
+function irAPago(){
+  // Recuperar token de sessionStorage si se perdió
+  if(!TOKEN_PAGO) TOKEN_PAGO = sessionStorage.getItem('disc_token') || '';
+  if(!TOKEN_PAGO){alert('Error: no se encontró tu sesión. Por favor recarga la página.');return;}
+  var btn=document.getElementById('btn-ir-pago');
+  btn.textContent='Conectando con Flow...';
+  btn.disabled=true;
+  fetch('https://disc-backend-production-d792.up.railway.app/pagos/iniciar', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({token:TOKEN_PAGO})
+  }).then(r=>r.json()).then(function(res){
+    if(res.ok && res.url){window.top.location.href=res.url;}
+    else{alert('Error: '+(res.detail||res.error||'Intenta nuevamente.'));btn.textContent='Pagar con Flow →';btn.disabled=false;}
+  }).catch(function(e){alert('Error: '+e.message);btn.textContent='Pagar con Flow →';btn.disabled=false;});
+}
+
+function imprimirResultado(){window.print();}
+
 </script>
-
 </body>
 </html>
