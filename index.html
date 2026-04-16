@@ -479,7 +479,37 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
 </div>
 <script>
-var PREGUNTAS=[],respuestas=[],currentQ=0,userData={},charts=[null,null],TOKEN_PAGO="";
+var PREGUNTAS=[
+  {id:1,adjetivos:[{texto:"Decidido",dim:"D"},{texto:"Influyente",dim:"I"},{texto:"Sereno",dim:"S"},{texto:"Cuidadoso",dim:"C"}]},
+  {id:2,adjetivos:[{texto:"Directo",dim:"D"},{texto:"Entusiasta",dim:"I"},{texto:"Paciente",dim:"S"},{texto:"Preciso",dim:"C"}]},
+  {id:3,adjetivos:[{texto:"Dominante",dim:"D"},{texto:"Optimista",dim:"I"},{texto:"Leal",dim:"S"},{texto:"Analítico",dim:"C"}]},
+  {id:4,adjetivos:[{texto:"Audaz",dim:"D"},{texto:"Sociable",dim:"I"},{texto:"Estable",dim:"S"},{texto:"Sistemático",dim:"C"}]},
+  {id:5,adjetivos:[{texto:"Competitivo",dim:"D"},{texto:"Expresivo",dim:"I"},{texto:"Tranquilo",dim:"S"},{texto:"Detallista",dim:"C"}]},
+  {id:6,adjetivos:[{texto:"Resuelto",dim:"D"},{texto:"Animado",dim:"I"},{texto:"Colaborador",dim:"S"},{texto:"Metódico",dim:"C"}]},
+  {id:7,adjetivos:[{texto:"Emprendedor",dim:"D"},{texto:"Carismático",dim:"I"},{texto:"Confiable",dim:"S"},{texto:"Perfeccionista",dim:"C"}]},
+  {id:8,adjetivos:[{texto:"Independiente",dim:"D"},{texto:"Persuasivo",dim:"I"},{texto:"Moderado",dim:"S"},{texto:"Disciplinado",dim:"C"}]},
+  {id:9,adjetivos:[{texto:"Pionero",dim:"D"},{texto:"Comunicativo",dim:"I"},{texto:"Gentil",dim:"S"},{texto:"Riguroso",dim:"C"}]},
+  {id:10,adjetivos:[{texto:"Valiente",dim:"D"},{texto:"Motivador",dim:"I"},{texto:"Comprensivo",dim:"S"},{texto:"Conservador",dim:"C"}]},
+  {id:11,adjetivos:[{texto:"Activo",dim:"D"},{texto:"Espontáneo",dim:"I"},{texto:"Considerado",dim:"S"},{texto:"Ordenado",dim:"C"}]},
+  {id:12,adjetivos:[{texto:"Enérgico",dim:"D"},{texto:"Creativo",dim:"I"},{texto:"Reflexivo",dim:"S"},{texto:"Lógico",dim:"C"}]},
+  {id:13,adjetivos:[{texto:"Firme",dim:"D"},{texto:"Entusiasta",dim:"I"},{texto:"Diplomático",dim:"S"},{texto:"Objetivo",dim:"C"}]},
+  {id:14,adjetivos:[{texto:"Determinado",dim:"D"},{texto:"Abierto",dim:"I"},{texto:"Constante",dim:"S"},{texto:"Cauteloso",dim:"C"}]},
+  {id:15,adjetivos:[{texto:"Exigente",dim:"D"},{texto:"Popular",dim:"I"},{texto:"Pacífico",dim:"S"},{texto:"Exacto",dim:"C"}]},
+  {id:16,adjetivos:[{texto:"Osado",dim:"D"},{texto:"Confiado",dim:"I"},{texto:"Modesto",dim:"S"},{texto:"Concienzudo",dim:"C"}]},
+  {id:17,adjetivos:[{texto:"Agresivo",dim:"D"},{texto:"Vivaz",dim:"I"},{texto:"Tolerante",dim:"S"},{texto:"Prudente",dim:"C"}]},
+  {id:18,adjetivos:[{texto:"Poderoso",dim:"D"},{texto:"Alegre",dim:"I"},{texto:"Receptivo",dim:"S"},{texto:"Analítico",dim:"C"}]},
+  {id:19,adjetivos:[{texto:"Incisivo",dim:"D"},{texto:"Sociable",dim:"I"},{texto:"Amable",dim:"S"},{texto:"Sistemático",dim:"C"}]},
+  {id:20,adjetivos:[{texto:"Dinámico",dim:"D"},{texto:"Promotor",dim:"I"},{texto:"Servicial",dim:"S"},{texto:"Meticuloso",dim:"C"}]},
+  {id:21,adjetivos:[{texto:"Resuelto",dim:"D"},{texto:"Animador",dim:"I"},{texto:"Empático",dim:"S"},{texto:"Detallista",dim:"C"}]},
+  {id:22,adjetivos:[{texto:"Rápido",dim:"D"},{texto:"Expresivo",dim:"I"},{texto:"Pausado",dim:"S"},{texto:"Crítico",dim:"C"}]},
+  {id:23,adjetivos:[{texto:"Retador",dim:"D"},{texto:"Inspirador",dim:"I"},{texto:"Afectuoso",dim:"S"},{texto:"Perfeccionista",dim:"C"}]},
+  {id:24,adjetivos:[{texto:"Arriesgado",dim:"D"},{texto:"Entusiasta",dim:"I"},{texto:"Estable",dim:"S"},{texto:"Preciso",dim:"C"}]},
+  {id:25,adjetivos:[{texto:"Decidido",dim:"D"},{texto:"Optimista",dim:"I"},{texto:"Paciente",dim:"S"},{texto:"Lógico",dim:"C"}]},
+  {id:26,adjetivos:[{texto:"Aventurero",dim:"D"},{texto:"Extrovertido",dim:"I"},{texto:"Tranquilo",dim:"S"},{texto:"Ordenado",dim:"C"}]},
+  {id:27,adjetivos:[{texto:"Mandante",dim:"D"},{texto:"Persuasivo",dim:"I"},{texto:"Comprensivo",dim:"S"},{texto:"Cauteloso",dim:"C"}]},
+  {id:28,adjetivos:[{texto:"Líder",dim:"D"},{texto:"Carismático",dim:"I"},{texto:"Colaborador",dim:"S"},{texto:"Analítico",dim:"C"}]}
+],respuestas=[],currentQ=0,userData={},charts=[null,null],TOKEN_PAGO="";
+respuestas=PREGUNTAS.map(function(){return{mas:null,menos:null};});
 var DIMENSIONES={};
 window.onload=function(){
   fetch('https://disc-backend-production-d792.up.railway.app/disc/preguntas').then(r=>r.json()).then(function(qs){PREGUNTAS=qs;respuestas=qs.map(function(){return{mas:null,menos:null};});}).catch(function(e){console.warn('Error cargando preguntas:',e);});
