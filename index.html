@@ -448,8 +448,8 @@ var PREGUNTAS=[
 respuestas=PREGUNTAS.map(function(){return{mas:null,menos:null};});
 var DIMENSIONES={};
 window.onload=function(){
-  fetch('https://disc-backend-production-d792.up.railway.app/disc/preguntas').then(r=>r.json()).then(function(qs){PREGUNTAS=qs;respuestas=qs.map(function(){return{mas:null,menos:null};});}).catch(function(e){console.warn('Error cargando preguntas:',e);});
-  fetch('https://disc-backend-production-d792.up.railway.app/disc/dimensiones').then(r=>r.json()).then(function(d){DIMENSIONES=d;}).catch(function(e){console.warn('Error cargando dimensiones:',e);});
+  fetch('https://disc-backend-production-0e6b.up.railway.app/disc/preguntas').then(r=>r.json()).then(function(qs){PREGUNTAS=qs;respuestas=qs.map(function(){return{mas:null,menos:null};});}).catch(function(e){console.warn('Error cargando preguntas:',e);});
+  fetch('https://disc-backend-production-0e6b.up.railway.app/disc/dimensiones').then(r=>r.json()).then(function(d){DIMENSIONES=d;}).catch(function(e){console.warn('Error cargando dimensiones:',e);});
 };
 function showScreen(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('active');});document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
 function goInstructions(){var n=document.getElementById('inp-nombre').value.trim(),a=document.getElementById('inp-apellido').value.trim(),e=document.getElementById('inp-email').value.trim(),err=document.getElementById('welcome-error');if(!n||!a||!e){err.classList.add('show');return;}err.classList.remove('show');userData={nombre:n,apellido:a,email:e};showScreen('s-instructions');}
@@ -478,7 +478,7 @@ function submitTest(){
     var adjs=PREGUNTAS[qi].adjetivos;
     return{mas:r.mas!==null?adjs[r.mas].dim:null,menos:r.menos!==null?adjs[r.menos].dim:null};
   });
-  fetch('https://disc-backend-production-d792.up.railway.app/disc/procesar',{
+  fetch('https://disc-backend-production-0e6b.up.railway.app/disc/procesar',{
     method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({nombre:userData.nombre,apellido:userData.apellido,email:userData.email,respuestas:respConvertidas})
   }).then(r=>r.json()).then(onResultado).catch(function(e){onError(e);});
@@ -550,7 +550,7 @@ function irAPago(){
   if(!TOKEN_PAGO){alert('Error: no se encontró tu sesión. Por favor recarga la página.');return;}
   var btn=document.getElementById('btn-ir-pago');
   btn.textContent='Conectando con Flow...';btn.disabled=true;
-  fetch('https://disc-backend-production-d792.up.railway.app/pagos/iniciar',{
+  fetch('https://disc-backend-production-0e6b.up.railway.app/pagos/iniciar',{
     method:'POST',headers:{'Content-Type':'application/json'},
     body:JSON.stringify({token:TOKEN_PAGO})
   }).then(r=>r.json()).then(function(res){
